@@ -6,12 +6,12 @@ const navItems = [
     subPaths: []
   },
   {
-    title: 'about',
+    title: 'Departments',
     path: '#', // Dropdown trigger
     subPaths: [
-      { title: 'Mission', path: '/mission' },
-      { title: 'Team & Culture', path: '/team-and-culture' },
-      { title: 'Open Source Innovation', path: '/open-source' }
+      { title: 'Pathshala', path: '/pathshala' },
+      { title: 'Collect Distribution Kure', path: '/collectdkure' },
+      { title: 'Arts & Crafts', path: '/art-and-craft' }
     ]
   },
   {
@@ -27,7 +27,7 @@ const currentPath = Astro.url.pathname;
 <header class="max-w-screen-xl m-auto px-4">
   <nav class="flex h-20 items-center justify-between">
     <a href="/">
-      <img src="https://gluelabs.com/images/logo.svg" loading="lazy" alt="Glue labs logo" class="w-20 lg:w-24">
+      <img src={"/images/logo.png"} loading="lazy" alt="Koshish Family Logo" class="w-20 lg:w-24">
     </a>
     
     <!-- Desktop Menu -->
