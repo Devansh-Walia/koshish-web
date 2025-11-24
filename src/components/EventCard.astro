@@ -2,31 +2,39 @@
 interface Props {
   title: string;
   date: string;
+  description: string;
   image: string;
 }
 
-const { title, date, image } = Astro.props;
+const { title, date, description, image } = Astro.props;
 ---
 
-<div class="col">
-  <div class="clean-card overflow-hidden group">
-    <div class="relative overflow-hidden">
+<div class="group h-full">
+  <div class="card h-full flex flex-col hover:shadow-xl transition-all duration-300">
+    <!-- Image -->
+    <div class="relative h-48 overflow-hidden">
       <img 
         src={image} 
-        alt={title}
-        title={title}
-        class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+        alt={title} 
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        onerror="this.src='https://placehold.co/600x400?text=Event'"
       />
+      <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wide text-blue-600 shadow-sm">
+        {date}
+      </div>
     </div>
-    <div class="p-6">
-      <div>
-        <h4 class="font-bold text-xl mb-2 font-jost text-black">{title}</h4>
-        <div class="flex items-center text-grey-600">
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-          </svg>
-          <p class="text-base">{date}</p>
-        </div>
+    
+    <!-- Content -->
+    <div class="p-6 flex-1 flex flex-col">
+      <h3 class="heading-sm text-xl mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+        {title}
+      </h3>
+      <p class="text-body text-sm text-gray-600 mb-4 line-clamp-3 flex-1">
+        {description}
+      </p>
+      
+      <div class="mt-auto pt-4 border-t border-gray-100">
+        <span class="text-blue-600 text-sm font-semibold group-hover:underline">Read More &rarr;</span>
       </div>
     </div>
   </div>

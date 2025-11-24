@@ -51,8 +51,8 @@ export const timelineData = [
   { year: 2021, title: "प्रयुक्तिः ( Event)", details: "Awareness Sessions, Summer Camps, Art n Craft Competitions, Yoga Sessions started on a regular basis.", image: "/images/timeline/2021.jpg" },
   { year: 2022, title: "पाठशाला ( Aashiyana)", details: "Koshish Family Completed 10 years. \"Aashiyana\" a place to study and grow with full amenities was created for Koshish Kids", image: "/images/timeline/2022.jpg" },
   { year: 2023, title: "पञ्चिका ( Registered)", details: "Koshish Family is registered with high hopes of improving lives with the mission to get formal education for all underprivileged Koshish Kids", image: "/images/timeline/2023.jpg" },
-  { year: 2024, title: "उन्नति (Unnati)", details: "First Kid graduated from Koshish Family after 12 years i.e.Bharti. She did her paid internship as a teacher in Scottish Academy Dehradun. We expanded to other areas of Doon.", image: "/images/timeline/2024.jpg" },
-  { year: 2025, title: "कौशल (Kaushala)", details: "Skill is the tool for success. Now, Koshish Kids are learning skills at the skill centre for better Job opportunities. Arjun, another graduate in the Koshish Family.", image: "/images/timeline/2025.jpg" }
+  { year: 2024, title: "उन्नति (Unnati)", details: "First Kid graduated from Koshish Family after 12 years i.e.Bharti. She did her paid internship as a teacher in Scottish Academy Dehradun. We expanded to other areas of Doon.", image: "/images/timeline/2024.jpeg" },
+  { year: 2025, title: "कौशल (Kaushala)", details: "Skill is the tool for success. Now, Koshish Kids are learning skills at the skill centre for better Job opportunities. Arjun, another graduate in the Koshish Family.", image: "/images/timeline/2025.jpeg" }
 ];
 
 export const events = [

@@ -1,23 +1,72 @@
 ---
-import TimelineSlider from './TimelineSlider.astro';
-import { timelineData } from '../data/homeData';
 ---
 
-<section id="timeline" class="section-spacing bg-white">
-  <div class="container">
-    <!-- Section Header -->
-    <div class="section-header text-center">
-      <h2 class="section-title">Our Journey</h2>
-      <p class="section-subtitle">The Evolution of Koshish Family</p>
+<section id="journey" class="section-spacing bg-blue-600 text-white relative overflow-hidden">
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 opacity-10">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)" />
+    </svg>
+  </div>
+
+  <div class="container relative z-10">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="heading-lg mb-6 text-white">Our Journey</h2>
+      <p class="text-xl text-blue-100 leading-relaxed">
+        From a small initiative to a family of hundreds, here is how we have grown over the years.
+      </p>
     </div>
-    
-    <div class="row">
-      <div class="col-lg-12">
-        <TimelineSlider items={timelineData} />
+
+    <div class="relative">
+      <!-- Connecting Line (Desktop) -->
+      <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-blue-400/30 -translate-y-1/2 rounded-full"></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <!-- Step 1 -->
+        <div class="relative group">
+          <div class="hidden md:block absolute top-1/2 left-1/2 w-4 h-4 bg-white rounded-full -translate-x-1/2 -translate-y-1/2 z-10 shadow-[0_0_0_8px_rgba(37,99,235,0.5)] group-hover:scale-125 transition-transform duration-300"></div>
+          <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 text-center md:text-left md:mb-12 md:hover:-translate-y-2">
+            <div class="text-4xl font-bold text-amber-400 mb-2">2018</div>
+            <h3 class="text-xl font-bold mb-2">Inception</h3>
+            <p class="text-blue-100 text-sm">Started with just 5 kids and a dream to educate.</p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="relative group md:mt-32">
+          <div class="hidden md:block absolute top-1/2 left-1/2 w-4 h-4 bg-white rounded-full -translate-x-1/2 -translate-y-1/2 z-10 shadow-[0_0_0_8px_rgba(37,99,235,0.5)] group-hover:scale-125 transition-transform duration-300"></div>
+          <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 text-center md:text-left md:hover:-translate-y-2">
+            <div class="text-4xl font-bold text-amber-400 mb-2">2020</div>
+            <h3 class="text-xl font-bold mb-2">Expansion</h3>
+            <p class="text-blue-100 text-sm">Reached 50+ children and started regular workshops.</p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="relative group">
+          <div class="hidden md:block absolute top-1/2 left-1/2 w-4 h-4 bg-white rounded-full -translate-x-1/2 -translate-y-1/2 z-10 shadow-[0_0_0_8px_rgba(37,99,235,0.5)] group-hover:scale-125 transition-transform duration-300"></div>
+          <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 text-center md:text-left md:mb-12 md:hover:-translate-y-2">
+            <div class="text-4xl font-bold text-amber-400 mb-2">2022</div>
+            <h3 class="text-xl font-bold mb-2">Recognition</h3>
+            <p class="text-blue-100 text-sm">Registered as an NGO and partnered with local schools.</p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="relative group md:mt-32">
+          <div class="hidden md:block absolute top-1/2 left-1/2 w-4 h-4 bg-white rounded-full -translate-x-1/2 -translate-y-1/2 z-10 shadow-[0_0_0_8px_rgba(37,99,235,0.5)] group-hover:scale-125 transition-transform duration-300"></div>
+          <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 text-center md:text-left md:hover:-translate-y-2">
+            <div class="text-4xl font-bold text-amber-400 mb-2">2024</div>
+            <h3 class="text-xl font-bold mb-2">Impact</h3>
+            <p class="text-blue-100 text-sm">Touching 100+ lives daily with holistic development.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>

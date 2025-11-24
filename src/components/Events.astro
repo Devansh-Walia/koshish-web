@@ -1,78 +1,43 @@
 ---
 import EventCard from './EventCard.astro';
-import { events, contact } from '../data/homeData';
+import { events } from '../data/homeData';
 ---
 
-<!-- Events Portfolio Section -->
-<section id="portfolio" class="section-spacing bg-white">
+<section id="events" class="section-spacing bg-white relative">
   <div class="container">
     <!-- Section Header -->
-    <div class="section-header text-center">
-      <h2 class="section-title">Events</h2>
-      <p class="section-subtitle">
-        Events by Koshish Family
-      </p>
+    <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+      <div class="max-w-2xl">
+        <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-amber-600 uppercase bg-amber-50 rounded-full">
+          Our Activities
+        </div>
+        <h2 class="heading-lg mb-4">Recent Events & Campaigns</h2>
+        <p class="text-body-lg text-gray-600">
+          We believe in holistic development. From educational workshops to fun-filled outings, see what we've been up to.
+        </p>
+      </div>
+      <a href="/events" class="btn btn-ghost hidden md:inline-flex group">
+        View All Events
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
     </div>
 
     <!-- Events Grid -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-      {events.map((event, index) => (
-        <div class="fade-in-simple" style={`animation-delay: ${index * 0.05}s;`}>
-          <EventCard 
-            title={event.title}
-            date={event.date}
-            image={event.image}
-          />
-        </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {events.map((event) => (
+        <EventCard 
+          title={event.title}
+          date={event.date}
+          description={event.description}
+          image={event.image}
+        />
       ))}
     </div>
-  </div>
-</section>
 
-<!-- Contact Section -->
-<section id="contact" class="section-spacing bg-grey-50">
-  <div class="container">
-    <!-- Section Header -->
-    <div class="section-header text-center">
-      <h2 class="section-title">{contact.heading}</h2>
-    </div>
-
-    <!-- Map -->
-    <div class="row justify-content-center">
-      <div class="col-12 col-lg-10">
-        <div class="clean-card overflow-hidden">
-          <iframe 
-            width="100%" 
-            height="600" 
-            frameborder="0" 
-            scrolling="no" 
-            marginheight="0" 
-            marginwidth="0" 
-            src={contact.mapUrl}
-            class="w-full"
-          ></iframe>
-        </div>
-      </div>
+    <div class="mt-12 text-center md:hidden">
+      <a href="/events" class="btn btn-outline w-full">View All Events</a>
     </div>
   </div>
 </section>
-
-<script>
-  // Animate event cards on scroll
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('#portfolio .fade-in-simple').forEach(el => {
-    observer.observe(el);
-  });
-</script>
