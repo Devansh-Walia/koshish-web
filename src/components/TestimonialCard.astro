@@ -1,0 +1,29 @@
+---
+import { postion } from '../types/enums';
+
+interface Props {
+  quote: string;
+  author: string;
+  image: string;
+  imagePosition?: postion;
+}
+
+const { quote, author, image, imagePosition = postion.left } = Astro.props;
+
+const flexDirection = imagePosition === postion.right ? 'md:flex-row-reverse' : 'md:flex-row';
+const imageMargin = imagePosition === 'right' ? 'md:ml-8' : 'md:mr-8';
+---
+
+<div class={`flex flex-col ${flexDirection} items-center bg-grey-50 rounded-xl p-8 shadow-md`}>
+  <img
+    src={image}
+    alt={author}
+    class={`w-32 h-32 rounded-full object-cover border-4 border-primary/20 shadow-md mb-4 md:mb-0 ${imageMargin}`}
+  />
+  <div class="text-center md:text-left">
+    <p class="text-lg italic text-grey-700 mb-2">
+      "{quote}"
+    </p>
+    <p class="text-primary font-semibold">— {author}</p>
+  </div>
+</div>

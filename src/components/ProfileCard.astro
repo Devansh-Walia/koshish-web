@@ -1,0 +1,56 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  image: string;
+  imagePosition?: 'left' | 'right';
+}
+
+const { name, description, image, imagePosition = 'left' } = Astro.props;
+
+const isLeft = imagePosition === 'left';
+---
+
+<div class="mb-8">
+  <div class="bg-white rounded-2xl shadow-lg overflow-hidden scale-hover">
+    <div class="row g-0">
+      {isLeft ? (
+        <>
+          <div class="col-lg-6 order-2 order-lg-1 p-6 md:p-8 flex flex-col justify-center">
+            <div class="services__content">
+              <h3 class="text-3xl md:text-4xl font-bold mb-4 font-jost gradient-text">{name}</h3>
+              <p class="text-lg text-grey-600 leading-relaxed">{description}</p>
+            </div>
+          </div>
+          <div class="col-lg-6 order-1 order-lg-2">
+            <div class="services__pic h-full">
+              <img 
+                src={image} 
+                alt={name} 
+                class="w-full h-full object-cover min-h-[300px] md:min-h-[400px]"
+              />
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div class="col-lg-6 order-1">
+            <div class="services__pic h-full">
+              <img 
+                src={image} 
+                alt={name} 
+                class="w-full h-full object-cover min-h-[300px] md:min-h-[400px]"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6 order-2 p-6 md:p-8 flex flex-col justify-center">
+            <div class="services__content">
+              <h3 class="text-3xl md:text-4xl font-bold mb-4 font-jost gradient-text">{name}</h3>
+              <p class="text-lg text-grey-600 leading-relaxed">{description}</p>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  </div>
+</div>

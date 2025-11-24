@@ -1,0 +1,99 @@
+---
+interface TimelineItem {
+  title: string;
+  icon: string;
+  content: string;
+  image?: string;
+}
+
+interface Props {
+  items: TimelineItem[];
+  accentColor?: string;
+}
+
+const { items, accentColor = '#0F52BA' } = Astro.props;
+---
+
+<div class="timeline-container">
+  <!-- Radio buttons for navigation -->
+  {items.map((_, index) => (
+    <input
+      type="radio"
+      name="timeline"
+      id={`timeline-${index + 1}`}
+      checked={index === 0}
+      class="hidden"
+    />
+  ))}
+
+  <!-- Navigation Dots -->
+  <div class="flex justify-start mb-12 overflow-x-auto pb-4">
+    <div class="relative flex items-center space-x-8 min-w-max">
+      {items.map((item, index) => (
+        <>
+          <label
+            for={`timeline-${index + 1}`}
+            class="timeline-nav-dot cursor-pointer flex flex-col items-center group"
+          >
+            <div class="w-12 h-12 rounded-full bg-white border-2 border-grey-300 flex items-center justify-center transition-all duration-300 group-hover:border-primary group-hover:scale-110">
+              <i class={`fas fa-${item.icon} text-xl text-grey-400 group-hover:text-primary transition-colors`}></i>
+            </div>
+            <span class="mt-2 text-sm text-grey-600 text-center max-w-[100px]">{item.title}</span>
+          </label>
+          {index < items.length - 1 && (
+            <div class="timeline-nav-line h-0.5 w-16 bg-grey-300"></div>
+          )}
+        </>
+      ))}
+    </div>
+  </div>
+
+  <!-- Content Slides -->
+  <div class="relative min-h-[400px]">
+    {items.map((item, index) => (
+      <div class={`timeline-slide timeline-slide-${index + 1} absolute inset-0 opacity-0 transition-opacity duration-500 pointer-events-none`}>
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <div class="text-6xl font-bold mb-4 text-primary">
+              <i class={`fas fa-${item.icon}`}></i>
+            </div>
+            <h3 class="text-3xl font-bold mb-4 font-jost text-primary">{item.title}</h3>
+            <p class="text-lg text-grey-600">
+              {item.content}
+            </p>
+          </div>
+          {item.image && (
+            <div>
+              <img 
+                src={item.image} 
+                alt={item.title}
+                class="rounded-xl shadow-lg w-full h-80 object-cover"
+              />
+            </div>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  /* Show active slide */
+  {items.map((_, index) => `
+    #timeline-${index + 1}:checked ~ div .timeline-slide-${index + 1} {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  `).join('\n')}
+
+  /* Active dot styling */
+  {items.map((_, index) => `
+    #timeline-${index + 1}:checked ~ div label[for="timeline-${index + 1}"] div {
+      border-color: var(--color-primary);
+      background-color: var(--color-primary);
+    }
+    #timeline-${index + 1}:checked ~ div label[for="timeline-${index + 1}"] i {
+      color: white;
+    }
+  `).join('\n')}
+</style>

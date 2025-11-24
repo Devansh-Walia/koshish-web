@@ -1,0 +1,124 @@
+---
+interface Props {
+  images: string[];
+  autoPlayInterval?: number;
+  showArrows?: boolean;
+  className?: string;
+}
+
+const { 
+  images, 
+  autoPlayInterval = 4000, 
+  showArrows = true,
+  className = ''
+} = Astro.props;
+
+const uniqueId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class={`relative w-full h-[500px] overflow-hidden rounded-2xl ${className}`} id={uniqueId}>
+  {images.map((img, index) => (
+    <div
+      class={`carousel-slide absolute top-0 left-0 w-full h-full transition-opacity duration-700 ease-in-out ${
+        index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'
+      }`}
+      data-index={index}
+    >
+      <img
+        src={img}
+        alt={`Slide ${index + 1}`}
+        class="w-full h-full object-cover rounded-2xl"
+      />
+    </div>
+  ))}
+  
+  {showArrows && (
+    <>
+      <!-- Left arrow -->
+      <button
+        class="carousel-prev absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white p-2 rounded-full shadow-md z-20 transition-all"
+        aria-label="Previous slide"
+      >
+        <i class="fas fa-chevron-left text-2xl text-gray-700"></i>
+      </button>
+      
+      <!-- Right arrow -->
+      <button
+        class="carousel-next absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white p-2 rounded-full shadow-md z-20 transition-all"
+        aria-label="Next slide"
+      >
+        <i class="fas fa-chevron-right text-2xl text-gray-700"></i>
+      </button>
+    </>
+  )}
+</div>
+
+<script define:vars={{ uniqueId, autoPlayInterval, imagesLength: images.length }}>
+  const carousel = document.getElementById(uniqueId);
+  const slides = carousel.querySelectorAll('.carousel-slide');
+  const prevBtn = carousel.querySelector('.carousel-prev');
+  const nextBtn = carousel.querySelector('.carousel-next');
+  
+  let currentIndex = 0;
+  let autoPlayTimer = null;
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      if (i === index) {
+        slide.classList.remove('opacity-0', 'z-0');
+        slide.classList.add('opacity-100', 'z-10');
+      } else {
+        slide.classList.remove('opacity-100', 'z-10');
+        slide.classList.add('opacity-0', 'z-0');
+      }
+    });
+    currentIndex = index;
+  }
+
+  function nextSlide() {
+    const next = (currentIndex + 1) % imagesLength;
+    showSlide(next);
+  }
+
+  function prevSlide() {
+    const prev = (currentIndex - 1 + imagesLength) % imagesLength;
+    showSlide(prev);
+  }
+
+  function startAutoPlay() {
+    if (autoPlayInterval > 0) {
+      autoPlayTimer = setInterval(nextSlide, autoPlayInterval);
+    }
+  }
+
+  function stopAutoPlay() {
+    if (autoPlayTimer) {
+      clearInterval(autoPlayTimer);
+      autoPlayTimer = null;
+    }
+  }
+
+  // Event listeners
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      stopAutoPlay();
+      startAutoPlay(); // Restart auto-play after manual navigation
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      stopAutoPlay();
+      startAutoPlay();
+    });
+  }
+
+  // Pause on hover
+  carousel.addEventListener('mouseenter', stopAutoPlay);
+  carousel.addEventListener('mouseleave', startAutoPlay);
+
+  // Start auto-play
+  startAutoPlay();
+</script>

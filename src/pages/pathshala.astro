@@ -1,6 +1,20 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import HeroSection from '../components/HeroSection.astro';
+import Carousel from '../components/Carousel.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import ProgramCard from '../components/ProgramCard.astro';
+import StatsGrid from '../components/StatsGrid.astro';
+import { 
+  hero, 
+  carouselImages, 
+  educationalApproach, 
+  testimonials, 
+  programs, 
+  impactStats, 
+  cta 
+} from '../data/pathshalaData';
 import '../styles/global.css';
 ---
 
@@ -11,35 +25,113 @@ import '../styles/global.css';
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Pathshala - Koshish Family</title>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 	</head>
 	<body class="text-black font-inter">
 		<Header />
 		
 		<main>
-            <section class="py-20 bg-grey-50">
-                <div class="max-w-screen-xl mx-auto px-4 text-center">
-                    <h1 class="text-5xl font-bold font-jost text-black mb-6">Pathshala Department</h1>
-                    <p class="text-2xl text-primary font-jost mb-8">Nurturing Young Minds, Building Better Futures</p>
-                    
-                    <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-grey-200 text-left">
-                        <h2 class="text-2xl font-bold font-jost mb-4">Our Educational Approach</h2>
-                        <p class="text-grey-600 mb-6 leading-relaxed">
-                            At Pathshala, we believe in providing holistic education that goes beyond textbooks. Our dedicated teachers focus on developing:
-                        </p>
-                        <ul class="list-disc list-inside space-y-2 text-grey-600 mb-8">
-                            <li>Critical thinking and problem-solving skills</li>
-                            <li>Creative expression and artistic abilities</li>
-                            <li>Strong foundation in core subjects</li>
-                            <li>Character development and values</li>
-                        </ul>
-                        
-                        <blockquote class="border-l-4 border-primary pl-4 italic text-grey-600">
-                            "Every child deserves a chance to shine, and every effort we make brings them closer to their dreams"
-                            <footer class="text-sm font-bold mt-2 not-italic">— Anisha Bharti</footer>
-                        </blockquote>
-                    </div>
-                </div>
-            </section>
+			<!-- Hero Section -->
+			<HeroSection 
+				title={hero.title}
+				subtitle={hero.subtitle}
+				backgroundImage={hero.backgroundImage}
+				buttonText={hero.buttonText}
+				buttonOnClick="document.getElementById('carousel-section').scrollIntoView({ behavior: 'smooth' })"
+			/>
+
+			<!-- Carousel -->
+			<div id="carousel-section" class="mx-4 md:mx-12 my-12 p-4 rounded-2xl shadow-lg bg-green-300/30">
+				<Carousel images={carouselImages} />
+			</div>
+
+			<div class="container mx-auto px-4">
+				<!-- Educational Approach -->
+				<section class="bg-green-300/30 rounded-2xl p-10 mb-16 shadow-lg">
+					<div class="grid md:grid-cols-2 gap-12">
+						<div class="space-y-6">
+							<h2 class="text-3xl font-bold text-gray-800 font-jost">
+								{educationalApproach.heading}
+							</h2>
+							<p class="text-lg text-grey-600">
+								{educationalApproach.description}
+							</p>
+							<ul class="space-y-4 text-grey-600">
+								{educationalApproach.focusAreas.map(area => (
+									<li class="flex items-center">
+										<i class={`${area.icon} text-primary mr-3`}></i>
+										{area.text}
+									</li>
+								))}
+							</ul>
+						</div>
+						<div class="grid grid-cols-2 gap-6">
+							{educationalApproach.images.map((img, index) => (
+								<img 
+									src={img} 
+									alt={`Student ${index + 1}`}
+									class="rounded-lg shadow-lg img-hover object-cover w-full h-full"
+								/>
+							))}
+						</div>
+					</div>
+				</section>
+
+				<!-- Testimonials -->
+				<section class="bg-green-300/30 rounded-2xl p-10 mb-16 space-y-12 shadow-lg">
+					{testimonials.map((testimonial) => (
+						<TestimonialCard 
+							quote={testimonial.quote}
+							author={testimonial.author}
+							image={testimonial.image}
+							imagePosition={testimonial.imagePosition}
+						/>
+					))}
+				</section>
+
+				<!-- Programs -->
+				<section class="bg-green-300/30 rounded-xl p-12 mb-16 shadow-lg">
+					<h2 class="text-3xl font-bold text-gray-800 mb-8 text-center font-jost">
+						Our Programs
+					</h2>
+					<div class="grid md:grid-cols-3 gap-8">
+						{programs.map((program) => (
+							<ProgramCard 
+								icon={program.icon}
+								title={program.title}
+								description={program.description}
+								iconBgColor="bg-indigo-100"
+							/>
+						))}
+					</div>
+				</section>
+
+				<!-- Impact Stats -->
+				<section class="bg-green-300/30 rounded-2xl p-10 mb-16 shadow-lg">
+					<h2 class="text-3xl font-bold text-gray-800 mb-8 text-center font-jost">
+						Our Impact
+					</h2>
+					<StatsGrid stats={impactStats} />
+				</section>
+
+				<!-- CTA Section -->
+				<section class="bg-green-300/30 rounded-2xl p-10 mb-16 shadow-lg text-center">
+					<h2 class="brush-underline text-4xl font-bold text-gray-800 mb-6 font-jost">
+						{cta.heading}
+					</h2>
+					<p class="text-xl text-grey-600 mb-8 max-w-3xl mx-auto">
+						{cta.description}
+					</p>
+					<a
+						href={cta.buttonLink}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="ripple-button inline-block text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 bg-[#0F52BA] hover:bg-blue-700"
+					>
+						{cta.buttonText}
+					</a>
+				</section>
+			</div>
 		</main>
 
 		<Footer />

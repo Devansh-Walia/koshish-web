@@ -1,0 +1,286 @@
+---
+interface TimelineItem {
+  year: number;
+  title: string;
+  details: string;
+  image: string;
+}
+
+interface Props {
+  items: TimelineItem[];
+}
+
+const { items } = Astro.props;
+const uniqueId = `timeline-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class="timeline-slider-container" id={uniqueId}>
+  <div class="timeline-slider">
+    {items.map((item, index) => (
+      <div class="timeline-item" data-index={index}>
+        <div 
+          class="timeline-img"
+          style={`background-image: url('${item.image}');`}
+        ></div>
+        <div class="timeline-content">
+          <h2 class="timeline-year">{item.year}</h2>
+          <h3 class="timeline-title">{item.title}</h3>
+          <p class="timeline-description">{item.details.substring(0, 100)}...</p>
+          <button class="btn-more" data-index={index}>Read More</button>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<!-- Modal -->
+<div id={`${uniqueId}-modal`} class="timeline-modal hidden fixed inset-0 bg-black/40 z-50 overflow-auto">
+  <div class="modal-content bg-white my-20 mx-auto p-8 border border-grey-300 w-4/5 max-w-2xl rounded-xl shadow-lg">
+    <span class="close text-grey-400 float-right text-4xl font-bold cursor-pointer hover:text-black">&times;</span>
+    <img id={`${uniqueId}-modal-image`} src="" alt="Year Image" class="img-fluid mb-3 rounded-lg w-full" />
+    <h2 id={`${uniqueId}-modal-year`} class="text-center text-3xl font-bold mb-2"></h2>
+    <h3 id={`${uniqueId}-modal-title`} class="text-center text-xl mb-4"></h3>
+    <p id={`${uniqueId}-modal-details`} class="text-justify text-grey-700"></p>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+
+<script define:vars={{ uniqueId, items }}>
+  // Wait for jQuery and Slick to be available
+  function initSlider() {
+    if (typeof jQuery === 'undefined' || typeof jQuery.fn.slick === 'undefined') {
+      setTimeout(initSlider, 100);
+      return;
+    }
+
+    const $ = jQuery;
+    const $slider = $(`#${uniqueId} .timeline-slider`);
+    
+    $slider.slick({
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      dots: true,
+      centerMode: true,
+      focusOnSelect: true,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1
+          }
+        }
+      ]
+    });
+
+    // Modal functionality
+    const modal = document.getElementById(`${uniqueId}-modal`);
+    const closeBtn = modal.querySelector('.close');
+    const modalImage = document.getElementById(`${uniqueId}-modal-image`);
+    const modalYear = document.getElementById(`${uniqueId}-modal-year`);
+    const modalTitle = document.getElementById(`${uniqueId}-modal-title`);
+    const modalDetails = document.getElementById(`${uniqueId}-modal-details`);
+
+    // Add click handlers to all "Read More" buttons
+    document.querySelectorAll(`#${uniqueId} .btn-more`).forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const index = parseInt(this.getAttribute('data-index'));
+        const item = items[index];
+        
+        modalYear.textContent = item.year;
+        modalTitle.textContent = item.title;
+        modalDetails.textContent = item.details;
+        modalImage.src = item.image;
+        
+        modal.classList.remove('hidden');
+      });
+    });
+
+    // Close modal
+    closeBtn.addEventListener('click', () => {
+      modal.classList.add('hidden');
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+  }
+
+  // Start initialization
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSlider);
+  } else {
+    initSlider();
+  }
+</script>
+
+<style>
+  .timeline-slider-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .timeline-item {
+    margin: 0 15px;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 16px;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--color-primary), #9333ea);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .timeline-item:hover::before {
+    opacity: 1;
+  }
+
+  .timeline-item:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(33, 150, 243, 0.3);
+  }
+
+  .timeline-img {
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .timeline-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 100%);
+  }
+
+  .timeline-content {
+    padding: 24px;
+    position: relative;
+  }
+
+  .timeline-year {
+    font-size: 28px;
+    font-weight: bold;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #9333ea 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+    font-family: 'Jost', sans-serif;
+  }
+
+  .timeline-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: var(--color-black);
+    font-family: 'Jost', sans-serif;
+  }
+
+  .timeline-description {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    color: var(--color-grey-600);
+  }
+
+  .btn-more {
+    display: inline-block;
+    padding: 10px 24px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #1976d2 100%);
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+  }
+
+  .btn-more:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+  }
+
+  /* Modal Styles */
+  .timeline-modal {
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .modal-content {
+    animation: slideUp 0.4s ease;
+    position: relative;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .modal-content img {
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+
+  /* Slick Carousel Custom Styles */
+  :global(.slick-dots li button:before) {
+    font-size: 12px;
+    color: var(--color-primary);
+  }
+
+  :global(.slick-dots li.slick-active button:before) {
+    color: var(--color-primary);
+  }
+
+  :global(.slick-prev),
+  :global(.slick-next) {
+    width: 40px;
+    height: 40px;
+    z-index: 10;
+  }
+
+  :global(.slick-prev:before),
+  :global(.slick-next:before) {
+    font-size: 40px;
+    color: var(--color-primary);
+  }
+</style>

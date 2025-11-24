@@ -1,51 +1,68 @@
 ---
-const kids = [
-  {
-    name: "Bharti",
-    description: "A college going smart and sweet intelligent girl with a very creative mind. Being the eldest she is always up for any responsibilities and us growing really gracefully.",
-    image: "/images/kids/bharti.jpeg"
-  },
-  {
-    name: "Arjun",
-    description: "Arjun, a quite, shy and soft hearted boy always ready to help. Smile is his trademark and it suits him the most. Starting his new phase of life after 12th let's wish a lot of luck.",
-    image: "/images/kids/arjun.jpeg"
-  },
-  {
-    name: "Ramesh",
-    description: "Ramesh our mechanical boy and ITI student. Love, Respect, Leadership and Cooperativeness is what makes him loved by all and genuineness is what lies in his heart.",
-    image: "/images/kids/ramesh.jpeg"
-  },
-  {
-    name: "Reena",
-    description: "Our shy girl Reena currently studying in class 9th. A very sweet and simple kid with a very attractive aura which makes her loved by all. She dreams big and hope they'll become true.",
-    image: "/images/kids/reena.jpeg"
-  }
-];
+import ProfileCard from './ProfileCard.astro';
+import { kids } from '../data/homeData';
 ---
 
-<section class="py-16 bg-grey-50">
-  <div class="max-w-screen-xl mx-auto px-4">
-    <div class="text-center mb-12">
-      <h2 class="text-primary font-bold text-lg uppercase tracking-wider mb-2">Our Kids</h2>
-      <h3 class="text-4xl font-bold font-jost text-black">Know our Kids</h3>
+<section id="services" class="services py-20 bg-gradient-soft">
+  <div class="container">
+    <div class="row text-center mb-12">
+      <h1 class="text-5xl md:text-6xl font-bold font-jost gradient-underline">Our Kids</h1>
     </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      {kids.map((kid) => (
-        <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-grey-200 group">
-          <div class="w-32 h-32 mx-auto mb-6 overflow-hidden rounded-full border-4 border-white shadow-md">
-            <img 
-              src={kid.image} 
-              alt={kid.name} 
-              class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-            />
+    
+    <!-- Description -->
+    <div class="row justify-content-center mb-12">
+      <div class="col-lg-10">
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+          <div class="row g-0">
+            <div class="col-md-5 gradient-primary flex items-center justify-center p-6">
+              <h2 class="font-bold text-center font-jost text-3xl text-white">
+                Know our Kids
+              </h2>
+            </div>
+            <div class="col-md-7 flex items-center p-6">
+              <p class="text-lg text-grey-600 mb-0">
+                Meet our most senior and oldest kids who have grown with the Koshish Family and are now pursuing their dreams.
+              </p>
+            </div>
           </div>
-          <h4 class="text-xl font-bold text-center mb-3 font-jost">{kid.name}</h4>
-          <p class="text-grey-600 text-sm text-center leading-relaxed">
-            {kid.description}
-          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kids Profiles -->
+  <div class="container">
+    <div class="space-y-8">
+      {kids.map((kid, index) => (
+        <div class="fade-in" style={`animation-delay: ${index * 0.2}s;`}>
+          <ProfileCard 
+            name={kid.name}
+            description={kid.description}
+            image={kid.image}
+            imagePosition={kid.imagePosition}
+          />
         </div>
       ))}
     </div>
   </div>
 </section>
+
+<script>
+  // Animate profile cards on scroll
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('#services .fade-in').forEach(el => {
+    observer.observe(el);
+  });
+</script>

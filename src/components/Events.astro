@@ -1,43 +1,84 @@
 ---
-const events = [
-  { title: "Diwali Celebration", date: "October 2025", image: "/images/event/diwali-2025.jpg" },
-  { title: "Valentines Day Stall", date: "February 2023", image: "/images/event/event-1.jpg" },
-  { title: "Clothes Distribution Drive", date: "February 2023", image: "/images/event/event-2.jpg" },
-  { title: "Clothes Distribution Drive", date: "November 2022", image: "/images/event/event-3.jpg" },
-  { title: "Youthopia", date: "November 2022", image: "/images/event/event-4.jpg" },
-  { title: "Teachers Day", date: "September 2022", image: "/images/event/event-5.jpg" },
-  { title: "Diwali Stall", date: "October 2022", image: "/images/event/event-6.jpg" },
-  { title: "Chat Pooja", date: "October 2022", image: "/images/event/event-7.jpg" },
-  { title: "Youthopia", date: "April 2022", image: "/images/event/event-8.jpg" },
-  { title: "Mussorie Trip", date: "January 2022", image: "/images/event/event-9.jpg" }
-];
+import EventCard from './EventCard.astro';
+import { events, contact } from '../data/homeData';
 ---
 
-<section class="py-16 bg-grey-50">
-  <div class="max-w-screen-xl mx-auto px-4">
-    <h2 class="text-4xl font-bold font-jost text-black text-center mb-12">Events</h2>
-    
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      {events.map((event) => (
-        <div class="bg-white rounded-xl shadow-sm border border-grey-200 overflow-hidden group hover:shadow-lg transition-all duration-300">
-          <div class="h-48 overflow-hidden relative">
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10"></div>
-            <img 
-              src={event.image} 
-              alt={event.title} 
-              class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-            />
-          </div>
-          <div class="p-6">
-            <div class="flex items-start justify-between mb-2">
-                <span class="text-xs font-bold text-primary uppercase tracking-wider">{event.date}</span>
-            </div>
-            <h3 class="text-xl font-bold font-jost text-black group-hover:text-primary transition-colors">
-              {event.title}
-            </h3>
-          </div>
+<!-- Events Portfolio Section -->
+<section id="portfolio" class="portfolio py-20 bg-gradient-soft">
+  <div class="container">
+    <div class="row text-center mt-5 mb-16">
+      <h1 class="text-5xl md:text-6xl font-bold font-jost gradient-underline mb-6">Events</h1>
+      <p class="text-xl md:text-2xl text-grey-600 mt-8">
+        Events by Koshish Family
+      </p>
+    </div>
+
+    <!-- Events Grid -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      {events.map((event, index) => (
+        <div class="fade-in" style={`animation-delay: ${index * 0.1}s;`}>
+          <EventCard 
+            title={event.title}
+            date={event.date}
+            image={event.image}
+          />
         </div>
       ))}
     </div>
   </div>
 </section>
+
+<!-- Contact Section -->
+<section id="contact" class="get-started py-20 bg-white relative overflow-hidden">
+  <!-- Decorative gradient background -->
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute top-0 left-0 w-96 h-96 bg-primary rounded-full filter blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl"></div>
+  </div>
+
+  <div class="container relative z-10">
+    <div class="row text-center mb-16">
+      <h1 class="text-5xl md:text-6xl font-bold font-jost gradient-underline mb-6">{contact.heading}</h1>
+    </div>
+
+    <!-- Map -->
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10">
+        <div class="gradient-border p-1 rounded-2xl shadow-glow">
+          <div class="bg-white rounded-2xl overflow-hidden">
+            <iframe 
+              width="100%" 
+              height="600" 
+              frameborder="0" 
+              scrolling="no" 
+              marginheight="0" 
+              marginwidth="0" 
+              src={contact.mapUrl}
+              class="rounded-2xl"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Animate event cards on scroll
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('#portfolio .fade-in').forEach(el => {
+    observer.observe(el);
+  });
+</script>
