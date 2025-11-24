@@ -12,18 +12,18 @@ const isLeft = imagePosition === 'left';
 ---
 
 <div class="mb-8">
-  <div class="bg-white rounded-2xl shadow-lg overflow-hidden scale-hover">
+  <div class="clean-card overflow-hidden">
     <div class="row g-0">
       {isLeft ? (
         <>
-          <div class="col-lg-6 order-2 order-lg-1 p-6 md:p-8 flex flex-col justify-center">
-            <div class="services__content">
-              <h3 class="text-3xl md:text-4xl font-bold mb-4 font-jost gradient-text">{name}</h3>
+          <div class="col-lg-6 order-2 order-lg-1 p-8 md:p-12 flex flex-col justify-center">
+            <div>
+              <h3 class="text-3xl md:text-4xl font-bold mb-4 font-jost text-black">{name}</h3>
               <p class="text-lg text-grey-600 leading-relaxed">{description}</p>
             </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2">
-            <div class="services__pic h-full">
+            <div class="h-full">
               <img 
                 src={image} 
                 alt={name} 
@@ -35,7 +35,7 @@ const isLeft = imagePosition === 'left';
       ) : (
         <>
           <div class="col-lg-6 order-1">
-            <div class="services__pic h-full">
+            <div class="h-full">
               <img 
                 src={image} 
                 alt={name} 
@@ -43,9 +43,9 @@ const isLeft = imagePosition === 'left';
               />
             </div>
           </div>
-          <div class="col-lg-6 order-2 p-6 md:p-8 flex flex-col justify-center">
-            <div class="services__content">
-              <h3 class="text-3xl md:text-4xl font-bold mb-4 font-jost gradient-text">{name}</h3>
+          <div class="col-lg-6 order-2 p-8 md:p-12 flex flex-col justify-center">
+            <div>
+              <h3 class="text-3xl md:text-4xl font-bold mb-4 font-jost text-black">{name}</h3>
               <p class="text-lg text-grey-600 leading-relaxed">{description}</p>
             </div>
           </div>

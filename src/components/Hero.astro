@@ -2,59 +2,43 @@
 import { hero } from '../data/homeData';
 ---
 
-<section id="home" class="intro-section p-0 m-0 relative overflow-hidden">
-  <!-- Background Image Block with Gradient Overlay -->
-  <div class="relative bg-cover bg-center pt-24 min-h-screen flex items-center" style={`background-image: url('${hero.backgroundImage}');`}>
-    <!-- Gradient Overlay for better text contrast -->
-    <div class="absolute inset-0 gradient-dark-overlay"></div>
-    
-    <!-- Content -->
-    <div class="container relative z-10 py-24">
-      <div class="row align-items-center text-white">
-        <div class="col-md-8 col-lg-7 intros text-start">
-          <!-- Glass morphism card for content -->
-          <div class="glass-dark p-6 md:p-8 rounded-2xl shadow-glow fade-in">
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 font-jost text-shadow-strong">
-              <span class="block slide-in-left">{hero.title}</span>
-              <span class="block mt-4 text-xl md:text-2xl lg:text-3xl font-normal leading-tight slide-in-right" style="animation-delay: 0.2s;">
-                {hero.subtitle}
-              </span>
-            </h1>
-            <p class="text-lg md:text-xl mb-8 text-gray-100 leading-relaxed fade-in" style="animation-delay: 0.4s;">
-              {hero.description}
-            </p>
-            <a 
-              href={hero.buttonLink}
-              target="_blank" 
-              class="ripple-button inline-block gradient-primary text-white px-8 py-4 rounded-full font-semibold text-lg shadow-glow-hover transition-all duration-300 hover:scale-105 fade-in"
-              style="animation-delay: 0.6s;"
-            >
-              {hero.buttonText}
-            </a>
-          </div>
+<section id="home" class="section-spacing-lg bg-white">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <!-- Hero Content -->
+        <div class="text-center fade-in-simple">
+          <h1 class="section-title" style="font-size: 4.5rem; margin-bottom: 2rem;">
+            {hero.title}
+          </h1>
+          <p class="section-subtitle" style="font-size: 1.5rem; max-width: 800px; margin: 0 auto 1.5rem;">
+            {hero.subtitle}
+          </p>
+          <p class="text-grey-500 text-lg mb-12" style="max-width: 700px; margin: 0 auto 3rem;">
+            {hero.description}
+          </p>
+          <a 
+            href={hero.buttonLink}
+            target="_blank" 
+            class="btn-minimal"
+          >
+            {hero.buttonText}
+          </a>
         </div>
       </div>
     </div>
-
-    <!-- Wave Shape at the END -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"
-         class="block absolute bottom-0 left-0 right-0 z-20 -mb-px">
-      <path fill="#ffffff" fill-opacity="1" 
-            d="M0,160L48,176C96,192,192,224,288,208C384,192,480,128,576,133.3C672,139,768,213,864,202.7C960,192,1056,96,1152,74.7C1248,53,1344,107,1392,133.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
-      </path>
-    </svg>
   </div>
 </section>
 
 <script>
-  // Animate elements on page load
+  // Animate hero on page load
   document.addEventListener('DOMContentLoaded', () => {
-    const fadeElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
+    const heroElement = document.querySelector('#home .fade-in-simple');
     
     setTimeout(() => {
-      fadeElements.forEach(el => {
-        el.classList.add('visible');
-      });
+      if (heroElement) {
+        heroElement.classList.add('visible');
+      }
     }, 100);
   });
 </script>

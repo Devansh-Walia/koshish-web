@@ -3,11 +3,11 @@
 import { postion } from "../types/enums";
 
 export const hero = {
-  title: "Hey! We're Koshish Family",
-  subtitle: "A Family for the Underprivileged. Dedicated towards helping children gain education and their overall skills",
-  description: "Volunteer and make a difference in the life of people those who are in need",
+  title: "Empowering Underprivileged Children",
+  subtitle: "We are dedicated to helping children gain education and develop their overall skills",
+  description: "Volunteer and make a difference in the lives of those who need it most",
   backgroundImage: "/images/event/event-4.jpg",
-  buttonText: "Join our Team",
+  buttonText: "Join Our Team",
   buttonLink: "https://docs.google.com/forms/d/e/1FAIpQLSd091F7yX0SJMDXT_eLybLfdX69u54_kKmCAwFaqCqXjuo-Dw/viewform"
 };
 

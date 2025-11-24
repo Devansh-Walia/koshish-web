@@ -3,38 +3,20 @@ import ProfileCard from './ProfileCard.astro';
 import { kids } from '../data/homeData';
 ---
 
-<section id="services" class="services py-20 bg-gradient-soft">
+<section id="services" class="section-spacing bg-grey-50">
   <div class="container">
-    <div class="row text-center mb-12">
-      <h1 class="text-5xl md:text-6xl font-bold font-jost gradient-underline">Our Kids</h1>
+    <!-- Section Header -->
+    <div class="section-header text-center">
+      <h2 class="section-title">Our Kids</h2>
+      <p class="section-subtitle">
+        Meet our most senior and oldest kids who have grown with the Koshish Family and are now pursuing their dreams.
+      </p>
     </div>
     
-    <!-- Description -->
-    <div class="row justify-content-center mb-12">
-      <div class="col-lg-10">
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-          <div class="row g-0">
-            <div class="col-md-5 gradient-primary flex items-center justify-center p-6">
-              <h2 class="font-bold text-center font-jost text-3xl text-white">
-                Know our Kids
-              </h2>
-            </div>
-            <div class="col-md-7 flex items-center p-6">
-              <p class="text-lg text-grey-600 mb-0">
-                Meet our most senior and oldest kids who have grown with the Koshish Family and are now pursuing their dreams.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Kids Profiles -->
-  <div class="container">
+    <!-- Kids Profiles -->
     <div class="space-y-8">
       {kids.map((kid, index) => (
-        <div class="fade-in" style={`animation-delay: ${index * 0.2}s;`}>
+        <div class="fade-in-simple" style={`animation-delay: ${index * 0.1}s;`}>
           <ProfileCard 
             name={kid.name}
             description={kid.description}
@@ -62,7 +44,7 @@ import { kids } from '../data/homeData';
     });
   }, observerOptions);
 
-  document.querySelectorAll('#services .fade-in').forEach(el => {
+  document.querySelectorAll('#services .fade-in-simple').forEach(el => {
     observer.observe(el);
   });
 </script>

@@ -4,11 +4,12 @@ import { events, contact } from '../data/homeData';
 ---
 
 <!-- Events Portfolio Section -->
-<section id="portfolio" class="portfolio py-20 bg-gradient-soft">
+<section id="portfolio" class="section-spacing bg-white">
   <div class="container">
-    <div class="row text-center mt-5 mb-16">
-      <h1 class="text-5xl md:text-6xl font-bold font-jost gradient-underline mb-6">Events</h1>
-      <p class="text-xl md:text-2xl text-grey-600 mt-8">
+    <!-- Section Header -->
+    <div class="section-header text-center">
+      <h2 class="section-title">Events</h2>
+      <p class="section-subtitle">
         Events by Koshish Family
       </p>
     </div>
@@ -16,7 +17,7 @@ import { events, contact } from '../data/homeData';
     <!-- Events Grid -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
       {events.map((event, index) => (
-        <div class="fade-in" style={`animation-delay: ${index * 0.1}s;`}>
+        <div class="fade-in-simple" style={`animation-delay: ${index * 0.05}s;`}>
           <EventCard 
             title={event.title}
             date={event.date}
@@ -29,34 +30,27 @@ import { events, contact } from '../data/homeData';
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="get-started py-20 bg-white relative overflow-hidden">
-  <!-- Decorative gradient background -->
-  <div class="absolute inset-0 opacity-10">
-    <div class="absolute top-0 left-0 w-96 h-96 bg-primary rounded-full filter blur-3xl"></div>
-    <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl"></div>
-  </div>
-
-  <div class="container relative z-10">
-    <div class="row text-center mb-16">
-      <h1 class="text-5xl md:text-6xl font-bold font-jost gradient-underline mb-6">{contact.heading}</h1>
+<section id="contact" class="section-spacing bg-grey-50">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-header text-center">
+      <h2 class="section-title">{contact.heading}</h2>
     </div>
 
     <!-- Map -->
     <div class="row justify-content-center">
       <div class="col-12 col-lg-10">
-        <div class="gradient-border p-1 rounded-2xl shadow-glow">
-          <div class="bg-white rounded-2xl overflow-hidden">
-            <iframe 
-              width="100%" 
-              height="600" 
-              frameborder="0" 
-              scrolling="no" 
-              marginheight="0" 
-              marginwidth="0" 
-              src={contact.mapUrl}
-              class="rounded-2xl"
-            ></iframe>
-          </div>
+        <div class="clean-card overflow-hidden">
+          <iframe 
+            width="100%" 
+            height="600" 
+            frameborder="0" 
+            scrolling="no" 
+            marginheight="0" 
+            marginwidth="0" 
+            src={contact.mapUrl}
+            class="w-full"
+          ></iframe>
         </div>
       </div>
     </div>
@@ -78,7 +72,7 @@ import { events, contact } from '../data/homeData';
     });
   }, observerOptions);
 
-  document.querySelectorAll('#portfolio .fade-in').forEach(el => {
+  document.querySelectorAll('#portfolio .fade-in-simple').forEach(el => {
     observer.observe(el);
   });
 </script>
