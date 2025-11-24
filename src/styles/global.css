@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-jost: "Jost", sans-serif;
+  --font-inter: "Inter", sans-serif;
+
+  --color-primary: #FF452D;
+  --color-primary-dark: #D93622;
+  --color-secondary: #2196F3;
+  --color-secondary-light: #F5FBFF;
+  
+  --color-grey: #4E4E4E;
+  --color-grey-50: #FAFAFA;
+  --color-grey-200: #E5E7EB;
+  --color-grey-300: #B3B3B3;
+  --color-grey-400: #9CA3AF;
+  --color-grey-600: #4B5563;
+  
+  --color-black: #1A1A1A;
+  --color-white: #FFFFFF;
+  
+  --shadow-light: 4px 10px 20px rgba(212, 217, 232, 0.6);
+}
+
+@layer base {
+  html {
+    font-family: 'Inter', sans-serif;
+    color: #1A1A1A;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Jost', sans-serif;
+  }
+}
+
+@layer components {
+  .font-jost {
+    font-family: 'Jost', sans-serif;
+  }
+  
+  .line-effect {
+    position: relative;
+  }
+  
+  .line-effect:after {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 1px;
+    width: 0px;
+    background-color: #FF452D;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: .15s;
+    content: "";
+  }
+  
+  .group:hover .line-effect:after,
+  .line-effect.page-active:after {
+    width: 100%;
+  }
+
+  .page-active:after {
+    content: "";
+    width: 100%;
+    background-color: #FF452D;
+  }
+}
