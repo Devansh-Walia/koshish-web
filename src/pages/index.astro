@@ -1,5 +1,10 @@
 ---
 import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Kids from '../components/Kids.astro';
+import Journey from '../components/Journey.astro';
+import Events from '../components/Events.astro';
+import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 ---
 
@@ -9,41 +14,19 @@ import '../styles/global.css';
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Get superpowers, innovation powered by AI</title>
+		<title>Koshish Family - A Family for the Underprivileged</title>
+		<meta name="description" content="Dedicated towards helping children gain education and their overall skills." />
 	</head>
 	<body class="text-black font-inter">
 		<Header />
 		
 		<main>
-			<section class="max-w-screen-xl m-auto px-4">
-				<div class="py-8 text-center lg:py-40">
-					<h1 class="relative text-4xl font-bold sm:text-5xl lg:text-8xl font-jost">
-						<span>Get superpowers</span>
-						<!-- Rocket Image Placeholder -->
-						<!-- <img src="/images/home/rocket.png" alt="innovation image" class="absolute -top-12 right-2 -z-10 w-16 sm:w-24 md:-top-6 md:right-20 lg:-top-24 lg:right-0 lg:w-auto"> -->
-					</h1>
-			
-					<div class="relative mt-2 font-jost text-xl font-normal sm:text-2xl lg:text-5xl">
-						<!-- Bulb Image Placeholder -->
-						<!-- <img src="/images/home/bulb.png" alt="idea" class="absolute top-24 left-0 w-14 sm:top-0 sm:w-24 md:left-20 lg:left-10 lg:w-auto"> -->
-						<div class="relative mx-auto w-44 font-jost text-xl font-normal sm:text-2xl lg:w-full lg:max-w-lg lg:text-5xl">
-							<span>powered by AI</span>
-							<span class="content-emphasis"></span>
-						</div>
-					</div>
-					
-			
-					<p class="mb-6 mt-5 text-grey sm:text-lg lg:mt-12 lg:text-2xl font-jost">
-						We are your innovation stack to <br>
-						build, share and grow — with speed
-					</p>
-			
-					<a href="#" class="group inline-flex items-center gap-2 text-center font-medium transition-all py-3 px-5 md:px-6 lg:px-10 rounded-full text-sm sm:text-base lg:text-lg bg-primary text-white hover:bg-primary-dark hover:shadow-md">
-						Learn More 
-						<svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" class="transition-all ease-out group-hover:translate-x-1" fill="none" viewBox="0 0 256 256" stroke="currentColor"><line x1="40" y1="128" x2="216" y2="128" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line><polyline points="144 56 216 128 144 200" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></polyline></svg>
-					</a>
-				</div>
-			</section>
+			<Hero />
+			<Kids />
+			<Journey />
+			<Events />
 		</main>
+
+		<Footer />
 	</body>
 </html>

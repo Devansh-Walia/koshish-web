@@ -1,0 +1,51 @@
+---
+const kids = [
+  {
+    name: "Bharti",
+    description: "A college going smart and sweet intelligent girl with a very creative mind. Being the eldest she is always up for any responsibilities and us growing really gracefully.",
+    image: "/images/kids/bharti.jpeg"
+  },
+  {
+    name: "Arjun",
+    description: "Arjun, a quite, shy and soft hearted boy always ready to help. Smile is his trademark and it suits him the most. Starting his new phase of life after 12th let's wish a lot of luck.",
+    image: "/images/kids/arjun.jpeg"
+  },
+  {
+    name: "Ramesh",
+    description: "Ramesh our mechanical boy and ITI student. Love, Respect, Leadership and Cooperativeness is what makes him loved by all and genuineness is what lies in his heart.",
+    image: "/images/kids/ramesh.jpeg"
+  },
+  {
+    name: "Reena",
+    description: "Our shy girl Reena currently studying in class 9th. A very sweet and simple kid with a very attractive aura which makes her loved by all. She dreams big and hope they'll become true.",
+    image: "/images/kids/reena.jpeg"
+  }
+];
+---
+
+<section class="py-16 bg-grey-50">
+  <div class="max-w-screen-xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-primary font-bold text-lg uppercase tracking-wider mb-2">Our Kids</h2>
+      <h3 class="text-4xl font-bold font-jost text-black">Know our Kids</h3>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {kids.map((kid) => (
+        <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-grey-200 group">
+          <div class="w-32 h-32 mx-auto mb-6 overflow-hidden rounded-full border-4 border-white shadow-md">
+            <img 
+              src={kid.image} 
+              alt={kid.name} 
+              class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+          <h4 class="text-xl font-bold text-center mb-3 font-jost">{kid.name}</h4>
+          <p class="text-grey-600 text-sm text-center leading-relaxed">
+            {kid.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

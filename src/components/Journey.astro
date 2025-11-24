@@ -1,0 +1,138 @@
+---
+const timeline = [
+  { 
+    year: "2012", 
+    title: "प्रारंभिक (Beginning)", 
+    description: "Journey started with teaching One kid. Raised Funds for him by selling handmade cards outside College canteen. Gave our efforts a name 'Koshish'",
+    image: "/images/timeline/2012.jpg"
+  },
+  { 
+    year: "2013", 
+    title: "इक्शणा ( Vision)", 
+    description: "Created a Vision of providing education for the underprivileged kids, added more kids and members to Koshish and made it a family.",
+    image: "/images/timeline/2013.jpg"
+  },
+  { 
+    year: "2014", 
+    title: "साक्षरता (Education)", 
+    description: "Started Sending all kids to school taking care of their basic necessities and started celebrating major festivals likes Holi, Diwali, Rakhi, etc.",
+    image: "/images/timeline/2014.jpg"
+  },
+  { 
+    year: "2015", 
+    title: "उदय (Rise)", 
+    description: "Became a fully organized team, recruiting members from all over the city running campaigns like Installation of Dustbins, Distribution Drives and Craft Events.",
+    image: "/images/timeline/2015.jpg"
+  },
+  { 
+    year: "2016", 
+    title: "संवर्धनम् (Care)", 
+    description: "Took one step ahead in taking responsibilities of our kids' health, hygiene, and sanitation. Started organizing Health and Dental Camps for Kids and members.",
+    image: "/images/timeline/2016.jpg"
+  },
+  { 
+    year: "2017", 
+    title: "वितरणम् (Distribution)", 
+    description: "Visited Orphanage for the first time. Started organizing fruits and clothes distribution drives",
+    image: "/images/timeline/2017.jpg"
+  },
+  { 
+    year: "2018", 
+    title: "सफलता ( Success)", 
+    description: "First batch of Kids completed their board exams. Planned Kids Annual Trips to Museums, Zoos, etc",
+    image: "/images/timeline/2018.jpg"
+  },
+  { 
+    year: "2019", 
+    title: "सहकारिन् ( Collaboration )", 
+    description: "Collaboration with other NGOs and societies to help the needy and grow in the process",
+    image: "/images/timeline/2019.jpg"
+  },
+  { 
+    year: "2020", 
+    title: "आलम्बन ( Foundation)", 
+    description: "First Kid sent for Graduation fully sponsored by Koshish Family. Organized Digital classes during Covid Pandemic for all our kids.",
+    image: "/images/timeline/2020.jpg"
+  },
+  { 
+    year: "2021", 
+    title: "प्रयुक्तिः ( Event)", 
+    description: "Awareness Sessions, Summer Camps, Art n Craft Competitions, Yoga Sessions started on a regular basis.",
+    image: "/images/timeline/2021.jpg"
+  },
+  { 
+    year: "2022", 
+    title: "पाठशाला ( Aashiyana)", 
+    description: "Koshish Family Completed 10 years. \"Aashiyana\" a place to study and grow with full amenities was created for Koshish Kids",
+    image: "/images/timeline/2022.jpg"
+  },
+  { 
+    year: "2023", 
+    title: "पञ्चिका ( Registered)", 
+    description: "Koshish Family is registered with high hopes of improving lives with the mission to get formal education for all underprivileged Koshish Kids",
+    image: "/images/timeline/2023.jpg"
+  },
+  { 
+    year: "2024", 
+    title: "उन्नति (Unnati)", 
+    description: "First Kid graduated from Koshish Family after 12 years i.e.Bharti. She did her paid internship as a teacher in Scottish Academy Dehradun. We expanded to other areas of Doon.",
+    image: "/images/timeline/2024.jpeg"
+  },
+  { 
+    year: "2025", 
+    title: "कौशल (Kaushala)", 
+    description: "Skill is the tool for success. Now, Koshish Kids are learning skills at the skill centre for better Job opportunities. Arjun, another graduate in the Koshish Family.",
+    image: "/images/timeline/2025.jpeg"
+  }
+];
+---
+
+<section class="py-16 bg-white overflow-hidden">
+  <div class="max-w-screen-xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold font-jost text-black">Our Journey</h2>
+      <div class="w-20 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
+    </div>
+
+    <div class="relative">
+      <!-- Vertical Line -->
+      <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-grey-200 transform md:-translate-x-1/2"></div>
+
+      <div class="space-y-12">
+        {timeline.map((item, index) => (
+          <div class={`relative flex flex-col md:flex-row items-center ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+            
+            <!-- Content -->
+            <div class="w-full md:w-1/2 pl-12 md:pl-0 md:px-12 mb-4 md:mb-0">
+              <div class={`bg-white p-6 rounded-xl border border-grey-200 shadow-sm hover:shadow-md transition-all ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
+                
+                <!-- Image -->
+                <div class={`mb-4 overflow-hidden rounded-lg h-48 w-full`}>
+                    <img 
+                        src={item.image} 
+                        alt={item.title}
+                        class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+                    />
+                </div>
+
+                <span class="inline-block px-3 py-1 bg-secondary-light text-secondary text-sm font-bold rounded-full mb-2">
+                  {item.year}
+                </span>
+                <h3 class="text-xl font-bold font-jost text-black mb-2">{item.title}</h3>
+                <p class="text-grey-600 text-sm leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+
+            <!-- Dot -->
+            <div class="absolute left-4 md:left-1/2 w-4 h-4 bg-primary rounded-full border-4 border-white shadow-sm transform -translate-x-1/2 z-10"></div>
+            
+            <!-- Empty Space for the other side -->
+            <div class="w-full md:w-1/2"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

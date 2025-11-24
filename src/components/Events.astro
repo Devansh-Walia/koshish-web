@@ -1,0 +1,43 @@
+---
+const events = [
+  { title: "Diwali Celebration", date: "October 2025", image: "/images/event/diwali-2025.jpg" },
+  { title: "Valentines Day Stall", date: "February 2023", image: "/images/event/event-1.jpg" },
+  { title: "Clothes Distribution Drive", date: "February 2023", image: "/images/event/event-2.jpg" },
+  { title: "Clothes Distribution Drive", date: "November 2022", image: "/images/event/event-3.jpg" },
+  { title: "Youthopia", date: "November 2022", image: "/images/event/event-4.jpg" },
+  { title: "Teachers Day", date: "September 2022", image: "/images/event/event-5.jpg" },
+  { title: "Diwali Stall", date: "October 2022", image: "/images/event/event-6.jpg" },
+  { title: "Chat Pooja", date: "October 2022", image: "/images/event/event-7.jpg" },
+  { title: "Youthopia", date: "April 2022", image: "/images/event/event-8.jpg" },
+  { title: "Mussorie Trip", date: "January 2022", image: "/images/event/event-9.jpg" }
+];
+---
+
+<section class="py-16 bg-grey-50">
+  <div class="max-w-screen-xl mx-auto px-4">
+    <h2 class="text-4xl font-bold font-jost text-black text-center mb-12">Events</h2>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {events.map((event) => (
+        <div class="bg-white rounded-xl shadow-sm border border-grey-200 overflow-hidden group hover:shadow-lg transition-all duration-300">
+          <div class="h-48 overflow-hidden relative">
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10"></div>
+            <img 
+              src={event.image} 
+              alt={event.title} 
+              class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+            />
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between mb-2">
+                <span class="text-xs font-bold text-primary uppercase tracking-wider">{event.date}</span>
+            </div>
+            <h3 class="text-xl font-bold font-jost text-black group-hover:text-primary transition-colors">
+              {event.title}
+            </h3>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,75 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-black text-white pt-16 pb-8">
+  <div class="max-w-screen-xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      
+      <!-- Brand -->
+      <div class="col-span-1 md:col-span-2 lg:col-span-1">
+        <h3 class="text-2xl font-bold font-jost mb-4 text-primary">Koshish Family</h3>
+        <p class="text-grey-400 text-sm leading-relaxed mb-6">
+          A Family for the Underprivileged. Dedicated towards helping children gain education and their overall skills.
+        </p>
+        <div class="flex gap-4">
+          <!-- Social Icons could go here -->
+        </div>
+      </div>
+
+      <!-- Departments -->
+      <div>
+        <h4 class="text-lg font-bold font-jost mb-6">Departments</h4>
+        <ul class="space-y-3 text-grey-400 text-sm">
+          <li>
+            <a href="https://koshishfamily.org/pathshala" class="hover:text-primary transition-colors">Pathshala</a>
+          </li>
+          <li>
+            <a href="https://koshishfamily.org/collectdkure" class="hover:text-primary transition-colors">Collect Distribution Kure</a>
+          </li>
+          <li>
+            <a href="https://koshishfamily.org/art-and-craft" class="hover:text-primary transition-colors">Arts & Crafts</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h4 class="text-lg font-bold font-jost mb-6">Contact</h4>
+        <ul class="space-y-3 text-grey-400 text-sm">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            <span>Dehradun, India</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            <a href="mailto:koshishfamily@gmail.com" class="hover:text-white transition-colors">koshishfamily@gmail.com</a>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <a href="mailto:koshishfamily.hr@gmail.com" class="hover:text-white transition-colors">Contact HR Team</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Donate -->
+      <div>
+        <h4 class="text-lg font-bold font-jost mb-6">Support Us</h4>
+        <p class="text-grey-400 text-sm mb-4">Your contribution can change a life.</p>
+        <a 
+          href="https://forms.gle/R5NvNZdiupQ7V6L18" 
+          target="_blank"
+          class="inline-block bg-primary text-white font-medium py-2 px-6 rounded-full hover:bg-primary-dark transition-colors text-sm"
+        >
+          Donate Here
+        </a>
+      </div>
+    </div>
+
+    <div class="border-t border-grey-800 pt-8 text-center">
+      <p class="text-grey-600 text-sm">
+        &copy; {currentYear} Koshish Family. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>
