@@ -6,10 +6,10 @@
   --font-jost: "Jost", sans-serif;
   --font-inter: "Inter", sans-serif;
 
-  --color-primary: #FF452D;
-  --color-primary-dark: #D93622;
-  --color-secondary: #2196F3;
-  --color-secondary-light: #F5FBFF;
+  --color-primary: #2196f3;
+  --color-primary-dark: #1976d2;
+  --color-secondary: #616161;
+  --color-secondary-light: #f8f9fa;
   
   --color-grey: #4E4E4E;
   --color-grey-50: #FAFAFA;
@@ -51,7 +51,7 @@
     left: 0;
     height: 1px;
     width: 0px;
-    background-color: #FF452D;
+    background-color: var(--color-primary);
     transition-property: all;
     transition-timing-function: cubic-bezier(.4,0,.2,1);
     transition-duration: .15s;
@@ -66,6 +66,6 @@
   .page-active:after {
     content: "";
     width: 100%;
-    background-color: #FF452D;
+    background-color: var(--color-primary);
   }
 }
