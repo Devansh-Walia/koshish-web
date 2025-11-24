@@ -1,0 +1,52 @@
+---
+interface Artwork {
+  id: string;
+  title: string;
+  description: string;
+  images: string[];
+}
+
+interface Props {
+  artworks: Artwork[];
+  columns?: number;
+}
+
+const { artworks, columns = 3 } = Astro.props;
+const gridCols = {
+  2: 'md:grid-cols-2',
+  3: 'md:grid-cols-3',
+  4: 'md:grid-cols-4'
+}[columns] || 'md:grid-cols-3';
+---
+
+<div class={`grid grid-cols-1 ${gridCols} gap-6`}>
+  {artworks.map((artwork) => (
+    <div 
+      class="gallery-item group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+      data-artwork-id={artwork.id}
+      data-artwork-title={artwork.title}
+      data-artwork-description={artwork.description}
+      data-artwork-images={JSON.stringify(artwork.images)}
+    >
+      <img 
+        src={artwork.images[0]} 
+        alt={artwork.title}
+        class="w-full h-64 object-cover transition-all duration-500 group-hover:scale-110 group-hover:rotate-2"
+      />
+      <div class="gallery-overlay absolute inset-0 flex items-center justify-center p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent translate-y-full transition-transform duration-500 group-hover:translate-y-0">
+        <div class="text-center">
+          <h3 class="text-white text-2xl font-bold mb-2 font-jost">{artwork.title}</h3>
+          <p class="text-white text-sm opacity-80">Click to view details</p>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  // This script will be executed when the component is loaded
+  // The actual modal opening logic will be in the parent page or GalleryModal component
+  export function initGalleryItems() {
+    return document.querySelectorAll('.gallery-item');
+  }
+</script>

@@ -1,0 +1,23 @@
+---
+interface ArtForm {
+  icon: string;
+  name: string;
+}
+
+interface Props {
+  artForms: ArtForm[];
+  columns?: number;
+}
+
+const { artForms, columns = 2 } = Astro.props;
+const gridCols = columns === 2 ? 'grid-cols-2' : `grid-cols-${columns}`;
+---
+
+<div class={`grid ${gridCols} gap-4 text-grey-600`}>
+  {artForms.map((form) => (
+    <li class="flex items-center">
+      <i class={`${form.icon} text-primary mr-3`}></i>
+      {form.name}
+    </li>
+  ))}
+</div>

@@ -1,0 +1,210 @@
+---
+interface Props {
+  modalId?: string;
+}
+
+const { modalId = 'artworkModal' } = Astro.props;
+---
+
+<!-- Modal Backdrop -->
+<div id={modalId} class="fixed inset-0 bg-black/75 z-50 hidden items-center justify-center p-4 modal-backdrop">
+  <div class="modal-content-wrapper w-full max-w-4xl">
+    <div class="modal-content bg-white rounded-lg w-full max-h-[90vh] flex flex-col overflow-hidden">
+      <!-- Header -->
+      <div class="flex justify-between items-center p-4 border-b border-grey-200">
+        <h3 id={`${modalId}Title`} class="text-xl font-bold font-jost"></h3>
+        <button 
+          id={`${modalId}Close`}
+          class="text-grey-500 hover:text-grey-700 transition-colors"
+          aria-label="Close modal"
+        >
+          <i class="fas fa-times text-2xl"></i>
+        </button>
+      </div>
+      
+      <!-- Image Container -->
+      <div class="relative flex-1 overflow-hidden bg-grey-50">
+        <img 
+          id={`${modalId}Image`}
+          alt="Artwork"
+          class="w-full h-full object-contain max-h-[60vh]"
+        />
+        
+        <!-- Navigation Arrows -->
+        <button 
+          id={`${modalId}Prev`}
+          class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/75 text-white rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300"
+          aria-label="Previous image"
+        >
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button 
+          id={`${modalId}Next`}
+          class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/75 text-white rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300"
+          aria-label="Next image"
+        >
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        
+        <!-- Image Counter -->
+        <div 
+          id={`${modalId}Counter`}
+          class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded-full text-sm"
+        >
+        </div>
+      </div>
+      
+      <!-- Description -->
+      <div class="p-4 border-t border-grey-200">
+        <p id={`${modalId}Description`} class="text-grey-700"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal-backdrop {
+    animation: modalFadeIn 0.3s ease-out;
+  }
+
+  .modal-backdrop.hidden {
+    display: none;
+  }
+
+  @keyframes modalFadeIn {
+    from { 
+      opacity: 0; 
+    }
+    to { 
+      opacity: 1; 
+    }
+  }
+
+  /* Custom scrollbar for modal content */
+  .modal-content {
+    scrollbar-width: thin;
+    scrollbar-color: #f59e0b transparent;
+  }
+
+  .modal-content::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .modal-content::-webkit-scrollbar-thumb {
+    background-color: #f59e0b;
+    border-radius: 3px;
+  }
+
+  .modal-content::-webkit-scrollbar-track {
+    background: transparent;
+  }
+</style>
+
+<script define:vars={{ modalId }}>
+  // Modal state
+  let currentArtwork = null;
+  let currentImageIndex = 0;
+
+  // Get DOM elements
+  const modal = document.getElementById(modalId);
+  const modalTitle = document.getElementById(`${modalId}Title`);
+  const modalDescription = document.getElementById(`${modalId}Description`);
+  const modalImage = document.getElementById(`${modalId}Image`);
+  const imageCounter = document.getElementById(`${modalId}Counter`);
+  const closeBtn = document.getElementById(`${modalId}Close`);
+  const prevBtn = document.getElementById(`${modalId}Prev`);
+  const nextBtn = document.getElementById(`${modalId}Next`);
+
+  // Open modal
+  function openModal(artwork) {
+    if (artwork.images.length > 0) {
+      currentArtwork = artwork;
+      currentImageIndex = 0;
+      updateModalContent();
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  // Close modal
+  function closeModal() {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = 'auto';
+    currentArtwork = null;
+  }
+
+  // Update modal content
+  function updateModalContent() {
+    if (!currentArtwork) return;
+
+    modalTitle.textContent = currentArtwork.title;
+    modalDescription.textContent = currentArtwork.description;
+    modalImage.src = currentArtwork.images[currentImageIndex];
+    
+    if (currentArtwork.images.length > 1) {
+      imageCounter.textContent = `${currentImageIndex + 1} / ${currentArtwork.images.length}`;
+      prevBtn.style.display = 'flex';
+      nextBtn.style.display = 'flex';
+    } else {
+      imageCounter.textContent = '';
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+    }
+  }
+
+  // Navigate images
+  function nextImage() {
+    if (!currentArtwork) return;
+    currentImageIndex = currentImageIndex === currentArtwork.images.length - 1 ? 0 : currentImageIndex + 1;
+    updateModalContent();
+  }
+
+  function prevImage() {
+    if (!currentArtwork) return;
+    currentImageIndex = currentImageIndex === 0 ? currentArtwork.images.length - 1 : currentImageIndex - 1;
+    updateModalContent();
+  }
+
+  // Event listeners
+  closeBtn?.addEventListener('click', closeModal);
+  prevBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    prevImage();
+  });
+  nextBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    nextImage();
+  });
+
+  // Close on backdrop click
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && currentArtwork) {
+      closeModal();
+    }
+  });
+
+  // Initialize gallery items
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const artwork = {
+          id: item.getAttribute('data-artwork-id') || '',
+          title: item.getAttribute('data-artwork-title') || '',
+          description: item.getAttribute('data-artwork-description') || '',
+          images: JSON.parse(item.getAttribute('data-artwork-images') || '[]')
+        };
+        openModal(artwork);
+      });
+    });
+  });
+</script>

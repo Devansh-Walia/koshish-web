@@ -1,6 +1,13 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import HeroSection from '../components/HeroSection.astro';
+import GalleryGrid from '../components/GalleryGrid.astro';
+import GalleryModal from '../components/GalleryModal.astro';
+import ProgramCard from '../components/ProgramCard.astro';
+import ArtFormsList from '../components/ArtFormsList.astro';
+import AnimatedCounter from '../components/AnimatedCounter.astro';
+import { artworks, artForms, programs, pageContent } from '../data/artAndCraftData';
 import '../styles/global.css';
 ---
 
@@ -10,42 +17,110 @@ import '../styles/global.css';
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Arts & Crafts - Koshish Family</title>
+		<title>Art & Craft - Koshish Family</title>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 	</head>
 	<body class="text-black font-inter">
 		<Header />
 		
 		<main>
-            <section class="py-20 bg-grey-50">
-                <div class="max-w-screen-xl mx-auto px-4 text-center">
-                    <h1 class="text-5xl font-bold font-jost text-black mb-6">Art & Craft</h1>
-                    <p class="text-2xl text-primary font-jost mb-8">Crafted with Care, Powered by Hope!</p>
-                    
-                    <div class="max-w-4xl mx-auto space-y-8">
-                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-grey-200 text-left">
-                            <h2 class="text-2xl font-bold font-jost mb-4">Creative Expression</h2>
-                            <p class="text-grey-600 leading-relaxed mb-4">
-                                The Art and Craft Department of Koshish is dedicated to nurturing creativity and self-expression through hands-on artistic activities. It focuses on engaging children in various art and craft-making sessions where they learn new skills while creating beautiful handmade products.
-                            </p>
-                            <p class="text-sm text-grey-400 italic">
-                                Note: These products are made by our dedicated volunteers and talented kids.
-                            </p>
-                        </div>
+			<!-- Hero Section -->
+			<HeroSection 
+				title={pageContent.hero.title}
+				subtitle={pageContent.hero.subtitle}
+				backgroundImage={pageContent.hero.backgroundImage}
+				buttonText={pageContent.hero.buttonText}
+				buttonOnClick="document.getElementById('gallery-section').scrollIntoView({ behavior: 'smooth' })"
+			/>
 
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="bg-white p-6 rounded-xl shadow-sm border border-grey-200">
-                                <h3 class="text-xl font-bold font-jost mb-3">Painting</h3>
-                                <p class="text-grey-600 text-sm">Exploring colors and imagination on canvas.</p>
-                            </div>
-                            <div class="bg-white p-6 rounded-xl shadow-sm border border-grey-200">
-                                <h3 class="text-xl font-bold font-jost mb-3">Handicrafts</h3>
-                                <p class="text-grey-600 text-sm">Creating beautiful items from simple materials.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+			<div class="container mx-auto px-4">
+				<!-- Creative Expression Section -->
+				<section class="mb-16">
+					<div class="grid md:grid-cols-2 gap-12 items-center">
+						<div class="space-y-6">
+							<h2 class="brush-underline text-3xl font-bold text-gray-800 font-jost">
+								{pageContent.creativeExpression.heading}
+							</h2>
+							<p class="text-lg text-grey-600">
+								{pageContent.creativeExpression.description}
+							</p>
+							<p class="text-sm text-grey-500 italic">
+								{pageContent.creativeExpression.note}
+							</p>
+							<div class="bg-amber-50 p-6 rounded-xl shadow-md">
+								<h3 class="text-xl font-bold mb-4 font-jost">
+									{pageContent.creativeExpression.artFormsHeading}
+								</h3>
+								<ArtFormsList artForms={artForms} />
+							</div>
+						</div>
+						<div class="creative-img">
+							<img 
+								src={pageContent.creativeExpression.illustration}
+								alt="Creative Arts" 
+								class="rounded-xl shadow-xl floating object-contain max-h-[500px] md:max-h-[700px] lg:max-h-[600px] w-auto mx-auto"
+							/>
+						</div>
+					</div>
+				</section>
+
+				<!-- Gallery Section -->
+				<section id="gallery-section" class="mb-16 scroll-mt-20">
+					<h2 class="brush-underline text-4xl font-bold text-gray-800 mb-8 text-center font-jost">
+						{pageContent.gallery.heading}
+					</h2>
+					<p class="font-bold text-gray-800 mb-6 text-center text-3xl">
+						{pageContent.gallery.counterPrefix}
+						<AnimatedCounter 
+							targetCount={pageContent.gallery.targetCount}
+							suffix="+"
+							className="bg-gradient-to-r from-amber-500 via-orange-600 to-amber-500 bg-clip-text text-transparent"
+						/>
+						{pageContent.gallery.counterSuffix}
+					</p>
+					<GalleryGrid artworks={artworks} />
+				</section>
+
+				<!-- Join Community Section -->
+				<section class="bg-amber-50 rounded-xl p-12 mb-16 relative overflow-hidden">
+					<div class="pattern-bg absolute inset-0"></div>
+					<div class="relative z-10">
+						<h2 class="brush-underline text-4xl font-bold text-gray-800 mb-8 text-center font-jost">
+							{pageContent.community.heading}
+						</h2>
+						<div class="grid md:grid-cols-4 gap-8">
+							{programs.map((program) => (
+								<ProgramCard 
+									icon={program.icon}
+									title={program.title}
+									description={program.description}
+								/>
+							))}
+						</div>
+					</div>
+				</section>
+
+				<!-- CTA Section -->
+				<section class="text-center mb-16 max-w-4xl mx-auto">
+					<h2 class="brush-underline text-4xl font-bold text-gray-800 mb-6 font-jost">
+						{pageContent.cta.heading}
+					</h2>
+					<p class="text-xl text-grey-600 mb-8">
+						{pageContent.cta.description}
+					</p>
+					<a
+						href={pageContent.cta.buttonLink}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="ripple-button inline-block text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 bg-[#0F52BA] hover:bg-blue-700"
+					>
+						{pageContent.cta.buttonText}
+					</a>
+				</section>
+			</div>
 		</main>
+
+		<GalleryModal />
 
 		<Footer />
 	</body>

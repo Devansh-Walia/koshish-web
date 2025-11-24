@@ -1,0 +1,49 @@
+---
+interface Props {
+  icon: string;
+  title: string;
+  description: string;
+  bgColor?: string;
+  iconBgColor?: string;
+}
+
+const { 
+  icon, 
+  title, 
+  description, 
+  bgColor = 'bg-white', 
+  iconBgColor = 'bg-amber-100' 
+} = Astro.props;
+---
+
+<div class={`program-card ${bgColor} p-8 rounded-xl shadow-lg text-center relative overflow-hidden transition-all duration-400 hover:-translate-y-2`}>
+  <!-- Hover gradient overlay -->
+  <div class="absolute inset-0 bg-gradient-to-br from-amber-500/10 to-orange-600/10 translate-y-full transition-transform duration-400 group-hover:translate-y-0"></div>
+  
+  <!-- Content -->
+  <div class="relative z-10">
+    <div class={`${iconBgColor} w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6`}>
+      <i class={`${icon} text-2xl text-primary`}></i>
+    </div>
+    <h3 class="text-xl font-bold font-jost mb-4">{title}</h3>
+    <p class="text-grey-600">{description}</p>
+  </div>
+</div>
+
+<style>
+  .program-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.1));
+    transform: translateY(100%);
+    transition: transform 0.4s ease-in-out;
+  }
+  
+  .program-card:hover::before {
+    transform: translateY(0);
+  }
+</style>
