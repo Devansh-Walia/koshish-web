@@ -12,6 +12,20 @@ interface Props {
 }
 
 const { items, accentColor = '#0F52BA' } = Astro.props;
+
+const dynamicStyles = items.map((_, index) => `
+  #timeline-${index + 1}:checked ~ div .timeline-slide-${index + 1} {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #timeline-${index + 1}:checked ~ div label[for="timeline-${index + 1}"] div {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+  }
+  #timeline-${index + 1}:checked ~ div label[for="timeline-${index + 1}"] i {
+    color: white;
+  }
+`).join('\n');
 ---
 
 <div class="timeline-container">
@@ -77,23 +91,4 @@ const { items, accentColor = '#0F52BA' } = Astro.props;
   </div>
 </div>
 
-<style>
-  /* Show active slide */
-  {items.map((_, index) => `
-    #timeline-${index + 1}:checked ~ div .timeline-slide-${index + 1} {
-      opacity: 1;
-      pointer-events: auto;
-    }
-  `).join('\n')}
-
-  /* Active dot styling */
-  {items.map((_, index) => `
-    #timeline-${index + 1}:checked ~ div label[for="timeline-${index + 1}"] div {
-      border-color: var(--color-primary);
-      background-color: var(--color-primary);
-    }
-    #timeline-${index + 1}:checked ~ div label[for="timeline-${index + 1}"] i {
-      color: white;
-    }
-  `).join('\n')}
-</style>
+<style set:html={dynamicStyles}></style>
