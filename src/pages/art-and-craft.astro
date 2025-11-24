@@ -1,0 +1,52 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Arts & Crafts - Koshish Family</title>
+	</head>
+	<body class="text-black font-inter">
+		<Header />
+		
+		<main>
+            <section class="py-20 bg-grey-50">
+                <div class="max-w-screen-xl mx-auto px-4 text-center">
+                    <h1 class="text-5xl font-bold font-jost text-black mb-6">Art & Craft</h1>
+                    <p class="text-2xl text-primary font-jost mb-8">Crafted with Care, Powered by Hope!</p>
+                    
+                    <div class="max-w-4xl mx-auto space-y-8">
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-grey-200 text-left">
+                            <h2 class="text-2xl font-bold font-jost mb-4">Creative Expression</h2>
+                            <p class="text-grey-600 leading-relaxed mb-4">
+                                The Art and Craft Department of Koshish is dedicated to nurturing creativity and self-expression through hands-on artistic activities. It focuses on engaging children in various art and craft-making sessions where they learn new skills while creating beautiful handmade products.
+                            </p>
+                            <p class="text-sm text-grey-400 italic">
+                                Note: These products are made by our dedicated volunteers and talented kids.
+                            </p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-grey-200">
+                                <h3 class="text-xl font-bold font-jost mb-3">Painting</h3>
+                                <p class="text-grey-600 text-sm">Exploring colors and imagination on canvas.</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-grey-200">
+                                <h3 class="text-xl font-bold font-jost mb-3">Handicrafts</h3>
+                                <p class="text-grey-600 text-sm">Creating beautiful items from simple materials.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+		</main>
+
+		<Footer />
+	</body>
+</html>

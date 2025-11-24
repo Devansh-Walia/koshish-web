@@ -1,0 +1,68 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Collect Distribution Kure - Koshish Family</title>
+	</head>
+	<body class="text-black font-inter">
+		<Header />
+		
+		<main>
+            <section class="py-20 bg-grey-50">
+                <div class="max-w-screen-xl mx-auto px-4 text-center">
+                    <h1 class="text-5xl font-bold font-jost text-black mb-6">Collect Distribution Kure</h1>
+                    <p class="text-2xl text-primary font-jost mb-8">Bridging the Gap Between Need and Support</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-grey-200 text-left">
+                            <h2 class="text-2xl font-bold font-jost mb-4">Our Mission</h2>
+                            <p class="text-grey-600 leading-relaxed">
+                                We are dedicated to collecting and distributing essential amenities to children and families in need. Our goal is to ensure that basic necessities reach those who require them the most, fostering a community of care and support.
+                            </p>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-grey-200 text-left">
+                            <h2 class="text-2xl font-bold font-jost mb-4">What We Collect</h2>
+                            <ul class="space-y-3 text-grey-600">
+                                <li class="flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    Educational Materials
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    Clothing
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    School Supplies
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    Food Items
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    Toys
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    Books
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+		</main>
+
+		<Footer />
+	</body>
+</html>
