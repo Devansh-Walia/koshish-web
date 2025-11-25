@@ -5,14 +5,33 @@
 
     async function handleSubmit(e: SubmitEvent) {
         isSubmitting = true;
-        // In a real implementation, this would send data to Web3Forms or similar
-        // For now, we simulate a delay
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        isSubmitting = false;
-        success = true;
-        // Reset form
-        (e.target as HTMLFormElement).reset();
-        setTimeout(() => (success = false), 5000);
+        error = false;
+        success = false;
+
+        const formData = new FormData(e.target as HTMLFormElement);
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                success = true;
+                (e.target as HTMLFormElement).reset();
+                setTimeout(() => (success = false), 5000);
+            } else {
+                error = true;
+                console.error("Form submission failed:", data);
+            }
+        } catch (err) {
+            error = true;
+            console.error("Form submission error:", err);
+        } finally {
+            isSubmitting = false;
+        }
     }
 </script>
 
