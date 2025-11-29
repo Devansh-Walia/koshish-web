@@ -6,9 +6,10 @@ interface Props {
   buttonText?: string;
   buttonLink?: string;
   buttonOnClick?: string;
+  titleColor?: string;
 }
 
-const { title, subtitle, backgroundImage, buttonText, buttonLink, buttonOnClick } = Astro.props;
+const { title, subtitle, backgroundImage, buttonText, buttonLink, buttonOnClick, titleColor = 'text-white' } = Astro.props;
 ---
 
 <div class="relative text-white py-24 px-4 mb-12 overflow-hidden">
@@ -23,7 +24,7 @@ const { title, subtitle, backgroundImage, buttonText, buttonLink, buttonOnClick 
   
   <!-- Content -->
   <div class="container mx-auto text-center relative z-10">
-    <h1 class="text-5xl font-bold mb-6 font-jost animate-fade-in">{title}</h1>
+    <h1 class={`text-5xl font-bold mb-6 font-jost animate-fade-in ${titleColor}`}>{title}</h1>
     <p class="text-2xl mb-8 animate-fade-in-delay-1">
       {subtitle}
     </p>

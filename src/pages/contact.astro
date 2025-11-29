@@ -9,17 +9,17 @@ import '../styles/global.css';
 ---
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
 		<title>Collect Distribution Kure - Koshish Family</title>
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  </head>
+	</head>
 	<body class="text-black font-inter">
-    <Header />
-    
+		<Header />
+		
 		<main>
 			<!-- Hero Section -->
 			<HeroSection 
@@ -39,8 +39,8 @@ import '../styles/global.css';
 						</h2>
 						<p class="text-grey-600 max-w-3xl mx-auto md:mx-0">
 							{mission.description}
-          </p>
-        </div>
+						</p>
+					</div>
 
 					<div class="grid md:grid-cols-2 gap-8 items-stretch">
 						<div class="bg-blue-50 py-16 p-4 rounded-xl shadow-md h-full flex flex-col justify-between">
@@ -52,7 +52,7 @@ import '../styles/global.css';
 									</li>
 								))}
 							</ul>
-                  </div>
+						</div>
 						<div class="grid grid-cols-2 gap-6 h-full">
 							{mission.images.map((img, index) => (
 								<img 
@@ -61,8 +61,8 @@ import '../styles/global.css';
 									class="rounded-xl shadow-xl img-hover object-cover w-full h-full"
 								/>
 							))}
-                  </div>
-                </div>
+						</div>
+					</div>
                 
                 <div class="flex items-start gap-4">
                   <div class="p-3 bg-primary/10 rounded-lg text-primary">
@@ -70,7 +70,7 @@ import '../styles/global.css';
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                  </div>
+					</div>
 				</section>
 
 				<!-- CTA Section -->
@@ -90,9 +90,9 @@ import '../styles/global.css';
 						{cta.buttonText}
 					</a>
 				</section>
-      </div>
-    </main>
+			</div>
+		</main>
 
-    <Footer />
-  </body>
+		<Footer />
+	</body>
 </html>

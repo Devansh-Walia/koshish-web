@@ -5,7 +5,8 @@ export const hero = {
   subtitle: "Bridging the Gap Between Need and Support",
   backgroundImage: "/images/event/event-4.jpg",
   buttonText: "Get Involved",
-  buttonLink: "https://forms.gle/R5NvNZdiupQ7V6L18"
+  buttonLink: "https://forms.gle/R5NvNZdiupQ7V6L18",
+  titleColor: "white"
 };
 
 export const mission = {
