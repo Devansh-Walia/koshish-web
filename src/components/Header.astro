@@ -82,8 +82,8 @@ const currentPath = Astro.url.pathname;
   </div>
 
   <!-- Mobile Menu Overlay -->
-  <div id="mobile-menu" class="fixed inset-0 z-50 bg-white transform translate-x-full transition-transform duration-300 md:hidden">
-    <div class="p-4 flex justify-between items-center border-b border-gray-100">
+  <div id="mobile-menu" class="hidden fixed inset-0 z-[100] bg-white transform transition-transform duration-300 md:hidden">
+    <div class="p-4 flex justify-between items-center border-b border-gray-100 bg-white">
       <span class="font-heading font-bold text-xl text-gray-900">Menu</span>
       <button id="mobile-menu-close" class="p-2 text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-100">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -91,7 +91,7 @@ const currentPath = Astro.url.pathname;
         </svg>
       </button>
     </div>
-    <div class="p-4 space-y-4 overflow-y-auto h-[calc(100vh-70px)]">
+    <div class="p-4 space-y-4 overflow-y-auto h-[calc(100vh-70px)] bg-white">
       {navItems.map((item) => (
         item.subPaths.length > 0 ? (
           <div class="space-y-2">
@@ -126,11 +126,17 @@ const currentPath = Astro.url.pathname;
 
   function toggleMenu() {
     if (mobileMenu) {
-      mobileMenu.classList.toggle('translate-x-full');
+      mobileMenu.classList.toggle('hidden');
       document.body.classList.toggle('overflow-hidden');
     }
   }
 
   if (toggleBtn) toggleBtn.addEventListener('click', toggleMenu);
   if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
+  
+  // Ensure menu is closed on page load/navigation
+  if (mobileMenu) {
+    mobileMenu.classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+  }
 </script>
