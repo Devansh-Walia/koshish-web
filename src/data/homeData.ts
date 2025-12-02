@@ -56,6 +56,7 @@ export const timelineData = [
 ];
 
 export const events = [
+  { title: "us next", date: "December 2025", image: "/images/event/diwali-2025.jpg", new: true },
   { title: "Diwali Celebration", date: "October 2025", image: "/images/event/diwali-2025.jpg" },
   { title: "Valentines Day Stall", date: "February 2023", image: "/images/event/event-1.jpg" },
   { title: "Clothes Distribution Drive", date: "February 2023", image: "/images/event/event-2.jpg" },

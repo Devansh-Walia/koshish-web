@@ -4,13 +4,14 @@ interface Props {
   date: string;
   description: string;
   image: string;
+  new?: boolean;
 }
 
-const { title, date, description, image } = Astro.props;
+const { title, date, description, image, new: isNew } = Astro.props;
 ---
 
 <div class="group h-full">
-  <div class="card h-full flex flex-col hover:shadow-xl transition-all duration-300">
+  <div class={`card h-full flex flex-col hover:shadow-xl transition-all duration-300 ${isNew ? 'bg-blue-50' : 'bg-white'}`}>
     <!-- Image -->
     <div class="relative h-48 overflow-hidden">
       <img 
@@ -19,9 +20,15 @@ const { title, date, description, image } = Astro.props;
         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         onerror="this.src='https://placehold.co/600x400?text=Event'"
       />
-      <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wide text-blue-600 shadow-sm">
-        {date}
-      </div>
+      {isNew ? (
+        <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wide shadow-sm">
+          Soon
+        </div>
+      ) : (
+        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wide text-blue-600 shadow-sm">
+          {date}
+        </div>
+      )}
     </div>
     
     <!-- Content -->
