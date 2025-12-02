@@ -4,7 +4,7 @@ import { timelineData } from "../data/homeData";
 
 <section
   id="journey"
-  class="section-spacing bg-blue-600 text-white relative overflow-hidden"
+  class="section-spacing bg-[var(--color-primary)] text-white relative overflow-hidden"
 >
   <!-- Background Pattern -->
   <div class="absolute inset-0 opacity-10">
@@ -39,7 +39,7 @@ import { timelineData } from "../data/homeData";
       >
         <!-- Connecting Line (Horizontal) -->
         <div
-          class="absolute top-1/2 left-0 right-0 h-1 bg-blue-400/30 -translate-y-1/2 rounded-full min-w-full"
+          class="absolute top-1/2 left-0 right-0 h-1 bg-[var(--color-primary-light)]/30 -translate-y-1/2 rounded-full min-w-full"
         >
         </div>
 
@@ -47,7 +47,7 @@ import { timelineData } from "../data/homeData";
           {
             timelineData.map((item, index) => (
               <div class="relative group flex-shrink-0 w-80 py-10">
-                <div class="absolute top-10 right-10 w-4 h-4 bg-white rounded-full -translate-x-1/2 -translate-y-1/2 z-10 shadow-[0_0_0_8px_rgba(37,99,235,0.5)] group-hover:scale-125 transition-transform duration-300" />
+                <div class="absolute top-10 right-10 w-4 h-4 bg-white rounded-full -translate-x-1/2 -translate-y-1/2 z-10 shadow-[0_0_0_8px_rgba(33,150,243,0.5)] group-hover:scale-125 transition-transform duration-300" />
                 <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 hover:-translate-y-2">
                   <div class="text-4xl font-bold text-amber-400 mb-2">
                     {item.year}
