@@ -1,16 +1,24 @@
 ---
+import { timelineData } from "../data/homeData";
 ---
 
-<section id="journey" class="section-spacing bg-blue-600 text-white relative overflow-hidden">
+<section
+  id="journey"
+  class="section-spacing bg-blue-600 text-white relative overflow-hidden"
+>
   <!-- Background Pattern -->
   <div class="absolute inset-0 opacity-10">
     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="1"/>
+          <path
+            d="M 40 0 L 0 0 0 40"
+            fill="none"
+            stroke="white"
+            stroke-width="1"></path>
         </pattern>
       </defs>
-      <rect width="100%" height="100%" fill="url(#grid)" />
+      <rect width="100%" height="100%" fill="url(#grid)"></rect>
     </svg>
   </div>
 
@@ -18,55 +26,117 @@
     <div class="text-center max-w-3xl mx-auto mb-16">
       <h2 class="heading-lg mb-6 text-white">Our Journey</h2>
       <p class="text-xl text-blue-100 leading-relaxed">
-        From a small initiative to a family of hundreds, here is how we have grown over the years.
+        From a small initiative to a family of hundreds, here is how we have
+        grown over the years.
       </p>
     </div>
 
     <div class="relative">
-      <!-- Connecting Line (Desktop) -->
-      <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-blue-400/30 -translate-y-1/2 rounded-full"></div>
-
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <!-- Step 1 -->
-        <div class="relative group">
-          <div class="hidden md:block absolute top-1/2 left-1/2 w-4 h-4 bg-white rounded-full -translate-x-1/2 -translate-y-1/2 z-10 shadow-[0_0_0_8px_rgba(37,99,235,0.5)] group-hover:scale-125 transition-transform duration-300"></div>
-          <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 text-center md:text-left md:mb-12 md:hover:-translate-y-2">
-            <div class="text-4xl font-bold text-amber-400 mb-2">2018</div>
-            <h3 class="text-xl font-bold mb-2">Inception</h3>
-            <p class="text-blue-100 text-sm">Started with just 5 kids and a dream to educate.</p>
-          </div>
+      <!-- Horizontal Timeline Container with Auto-scroll -->
+      <div
+        class="timeline-scroll-container overflow-x-auto overflow-y-hidden pb-4 scrollbar-hide"
+        id="timeline-container"
+      >
+        <!-- Connecting Line (Horizontal) -->
+        <div
+          class="absolute top-1/2 left-0 right-0 h-1 bg-blue-400/30 -translate-y-1/2 rounded-full min-w-full"
+        >
         </div>
 
-        <!-- Step 2 -->
-        <div class="relative group md:mt-32">
-          <div class="hidden md:block absolute top-1/2 left-1/2 w-4 h-4 bg-white rounded-full -translate-x-1/2 -translate-y-1/2 z-10 shadow-[0_0_0_8px_rgba(37,99,235,0.5)] group-hover:scale-125 transition-transform duration-300"></div>
-          <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 text-center md:text-left md:hover:-translate-y-2">
-            <div class="text-4xl font-bold text-amber-400 mb-2">2020</div>
-            <h3 class="text-xl font-bold mb-2">Expansion</h3>
-            <p class="text-blue-100 text-sm">Reached 50+ children and started regular workshops.</p>
-          </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="relative group">
-          <div class="hidden md:block absolute top-1/2 left-1/2 w-4 h-4 bg-white rounded-full -translate-x-1/2 -translate-y-1/2 z-10 shadow-[0_0_0_8px_rgba(37,99,235,0.5)] group-hover:scale-125 transition-transform duration-300"></div>
-          <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 text-center md:text-left md:mb-12 md:hover:-translate-y-2">
-            <div class="text-4xl font-bold text-amber-400 mb-2">2022</div>
-            <h3 class="text-xl font-bold mb-2">Recognition</h3>
-            <p class="text-blue-100 text-sm">Registered as an NGO and partnered with local schools.</p>
-          </div>
-        </div>
-
-        <!-- Step 4 -->
-        <div class="relative group md:mt-32">
-          <div class="hidden md:block absolute top-1/2 left-1/2 w-4 h-4 bg-white rounded-full -translate-x-1/2 -translate-y-1/2 z-10 shadow-[0_0_0_8px_rgba(37,99,235,0.5)] group-hover:scale-125 transition-transform duration-300"></div>
-          <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 text-center md:text-left md:hover:-translate-y-2">
-            <div class="text-4xl font-bold text-amber-400 mb-2">2024</div>
-            <h3 class="text-xl font-bold mb-2">Impact</h3>
-            <p class="text-blue-100 text-sm">Touching 100+ lives daily with holistic development.</p>
-          </div>
+        <div class="flex gap-8 min-w-max px-4">
+          {
+            timelineData.map((item, index) => (
+              <div class="relative group flex-shrink-0 w-80 py-10">
+                <div class="absolute top-10 right-10 w-4 h-4 bg-white rounded-full -translate-x-1/2 -translate-y-1/2 z-10 shadow-[0_0_0_8px_rgba(37,99,235,0.5)] group-hover:scale-125 transition-transform duration-300" />
+                <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 hover:-translate-y-2">
+                  <div class="text-4xl font-bold text-amber-400 mb-2">
+                    {item.year}
+                  </div>
+                  <h3 class="text-xl font-bold mb-2">{item.title}</h3>
+                  <p class="text-blue-100 text-sm">{item.details}</p>
+                </div>
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>
+
+    <style>
+      .timeline-scroll-container {
+        scroll-behavior: smooth;
+      }
+
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Hide scrollbar for IE, Edge and Firefox */
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* Auto-scroll animation */
+      @keyframes auto-scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+    </style>
+
+    <script>
+      // Auto-scroll functionality
+      const container = document.getElementById("timeline-container");
+      let isUserScrolling = false;
+      let scrollTimeout: number | undefined;
+
+      if (container) {
+        // Auto-scroll at a slow pace
+        const autoScroll = () => {
+          if (!isUserScrolling && container) {
+            const maxScroll = container.scrollWidth - container.clientWidth;
+            const currentScroll = container.scrollLeft;
+
+            if (currentScroll >= maxScroll) {
+              // Reset to start
+              container.scrollLeft = 0;
+            } else {
+              // Scroll slowly
+              container.scrollLeft += 1;
+            }
+          }
+        };
+
+        const scrollInterval = setInterval(autoScroll, 30);
+
+        // Pause auto-scroll when user interacts
+        container.addEventListener("mouseenter", () => {
+          isUserScrolling = true;
+        });
+
+        container.addEventListener("mouseleave", () => {
+          clearTimeout(scrollTimeout);
+          scrollTimeout = window.setTimeout(() => {
+            isUserScrolling = false;
+          }, 2000);
+        });
+
+        container.addEventListener("touchstart", () => {
+          isUserScrolling = true;
+        });
+
+        container.addEventListener("touchend", () => {
+          clearTimeout(scrollTimeout);
+          scrollTimeout = window.setTimeout(() => {
+            isUserScrolling = false;
+          }, 2000);
+        });
+      }
+    </script>
   </div>
 </section>
