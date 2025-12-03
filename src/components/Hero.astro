@@ -1,4 +1,5 @@
 ---
+import { impactStats } from "../data/collectDistributionKureData";
 import { hero } from "../data/homeData";
 ---
 
@@ -59,7 +60,7 @@ import { hero } from "../data/homeData";
           </div>
           <div class="flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-[var(--color-primary)]"></span>
-            <span>100+ Lives Impacted</span>
+            <span>{impactStats[1].value}+ Lives Impacted</span>
           </div>
         </div>
       </div>

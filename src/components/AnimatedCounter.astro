@@ -7,18 +7,18 @@ interface Props {
   className?: string;
 }
 
-const { 
-  targetCount, 
-  duration = 2000, 
-  prefix = '', 
-  suffix = '', 
-  className = '' 
+const {
+  targetCount,
+  duration = 2000,
+  prefix = "",
+  suffix = "",
+  className = "",
 } = Astro.props;
 
 const uniqueId = `counter-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
-<span 
+<span
   id={uniqueId}
   class={`animated-counter ${className}`}
   data-target={targetCount}
@@ -31,39 +31,36 @@ const uniqueId = `counter-${Math.random().toString(36).substr(2, 9)}`;
 
 <script>
   function animateCounter(element: HTMLElement) {
-    const target = parseInt(element.dataset.target || '0');
-    const duration = parseInt(element.dataset.duration || '2000');
-    const prefix = element.dataset.prefix || '';
-    const suffix = element.dataset.suffix || '';
-    
+    const target = parseInt(element.dataset.target || "0");
+    const duration = parseInt(element.dataset.duration || "2000");
+    const prefix = element.dataset.prefix || "";
+    const suffix = element.dataset.suffix || "";
+
     let count = 0;
     const increment = Math.ceil(target / (duration / 50));
-    
+
     const updateCounter = () => {
       if (count < target) {
         count += increment;
         if (count > target) count = target;
-        
+
         // Format the display
         let displayValue = count.toString();
-        if (suffix === '+' && count >= 1000) {
-          displayValue = '1000+';
-        }
-        
-        element.textContent = `${prefix}${displayValue}${suffix !== '+' ? suffix : (count >= 1000 ? '' : suffix)}`;
-        
+
+        element.textContent = `${prefix}${displayValue}${suffix}`;
+
         if (count < target) {
           setTimeout(updateCounter, 50);
         }
       }
     };
-    
+
     updateCounter();
   }
 
   // Initialize all counters on page load
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.animated-counter').forEach((el) => {
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".animated-counter").forEach((el) => {
       animateCounter(el as HTMLElement);
     });
   });

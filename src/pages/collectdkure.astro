@@ -1,11 +1,17 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import HeroSection from '../components/HeroSection.astro';
-import Timeline from '../components/Timeline.astro';
-import StatsGrid from '../components/StatsGrid.astro';
-import { hero, mission, impactStats, timelineData, cta } from '../data/collectDistributionKureData';
-import '../styles/global.css';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import HeroSection from "../components/HeroSection.astro";
+import Timeline from "../components/Timeline.astro";
+import StatsGrid from "../components/StatsGrid.astro";
+import {
+	hero,
+	mission,
+	impactStats,
+	timelineData,
+	cta,
+} from "../data/collectDistributionKureData";
+import "../styles/global.css";
 ---
 
 <html lang="en">
@@ -15,14 +21,17 @@ import '../styles/global.css';
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Collect Distribution Kure - Koshish Family</title>
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+		<link
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+			rel="stylesheet"
+		/>
 	</head>
 	<body class="text-black font-inter">
 		<Header />
-		
+
 		<main>
 			<!-- Hero Section -->
-			<HeroSection 
+			<HeroSection
 				title={hero.title}
 				subtitle={hero.subtitle}
 				backgroundImage={hero.backgroundImage}
@@ -35,7 +44,9 @@ import '../styles/global.css';
 				<!-- Mission Section -->
 				<section class="space-y-8 mb-16">
 					<div class="text-center md:text-left space-y-4">
-						<h2 class="brush-underline text-3xl font-bold text-gray-800 font-jost">
+						<h2
+							class="brush-underline text-3xl font-bold text-gray-800 font-jost"
+						>
 							{mission.heading}
 						</h2>
 						<p class="text-grey-600 max-w-3xl mx-auto md:mx-0">
@@ -44,31 +55,44 @@ import '../styles/global.css';
 					</div>
 
 					<div class="grid md:grid-cols-2 gap-8 items-stretch">
-						<div class="bg-blue-50 py-16 p-4 rounded-xl shadow-md h-full flex flex-col justify-between">
-							<h2 class="text-3xl font-bold mb-1 font-jost">{mission.collectHeading}</h2>
-							<ul class="grid grid-cols-2 gap-4 text-grey-600 content-center mb-5">
-								{mission.collectItems.map(item => (
-									<li class="flex items-center">
-										<i class="fas fa-book mr-3 text-primary"></i> {item}
-									</li>
-								))}
+						<div
+							class="bg-blue-50 py-16 p-4 rounded-xl shadow-md h-full flex flex-col justify-between"
+						>
+							<h2 class="text-3xl font-bold mb-1 font-jost">
+								{mission.collectHeading}
+							</h2>
+							<ul
+								class="grid grid-cols-2 gap-4 text-grey-600 content-center mb-5"
+							>
+								{
+									mission.collectItems.map((item) => (
+										<li class="flex items-center">
+											<i class="fas fa-book mr-3 text-primary" />{" "}
+											{item}
+										</li>
+									))
+								}
 							</ul>
 						</div>
 						<div class="grid grid-cols-2 gap-6 h-full">
-							{mission.images.map((img, index) => (
-								<img 
-									src={img} 
-									alt={`Distribution ${index + 1}`}
-									class="rounded-xl shadow-xl img-hover object-cover w-full h-full"
-								/>
-							))}
+							{
+								mission.images.map((img, index) => (
+									<img
+										src={img}
+										alt={`Distribution ${index + 1}`}
+										class="rounded-xl shadow-xl img-hover object-cover w-full h-full"
+									/>
+								))
+							}
 						</div>
 					</div>
 				</section>
 
 				<!-- Impact Counters -->
 				<section class="mb-16">
-					<h2 class="brush-underline text-3xl font-bold text-gray-800 mb-8 text-center font-jost">
+					<h2
+						class="brush-underline text-3xl font-bold text-gray-800 mb-8 text-center font-jost"
+					>
 						Our Impact
 					</h2>
 					<StatsGrid stats={impactStats} bgColor="bg-blue-50 py-16" />
@@ -77,7 +101,9 @@ import '../styles/global.css';
 				<!-- Timeline -->
 				<section class="bg-blue-50 py-16 rounded-xl mb-16">
 					<div class="max-w-7xl mx-auto px-6">
-						<h2 class="text-4xl font-bold text-center mb-16 text-primary font-jost">
+						<h2
+							class="text-4xl font-bold text-center mb-16 text-primary font-jost"
+						>
 							Our Impact Journey
 						</h2>
 						<Timeline items={timelineData} />
@@ -86,7 +112,9 @@ import '../styles/global.css';
 
 				<!-- CTA Section -->
 				<section class="bg-blue-50 py-16 rounded-xl text-center mb-16">
-					<h2 class="brush-underline text-4xl font-bold text-gray-800 mb-6 font-jost">
+					<h2
+						class="brush-underline text-4xl font-bold text-gray-800 mb-6 font-jost"
+					>
 						{cta.heading}
 					</h2>
 					<p class="text-xl text-grey-600 mb-8 max-w-3xl mx-auto">
