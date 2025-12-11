@@ -12,19 +12,61 @@ import {
 	cta,
 } from "../data/collectDistributionKureData";
 import "../styles/global.css";
+import { generateMetaTags, generatePageSchema, ORGANIZATION_SCHEMA } from "../data/seoConstants";
+
+const seoData = generateMetaTags("collectDkure");
+const pageSchema = generatePageSchema("collectDkure");
 ---
 
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Collect Distribution Kure - Koshish Family</title>
+		
+		<!-- Primary Meta Tags -->
+		<title>{seoData.title}</title>
+		<meta name="title" content={seoData.title} />
+		<meta name="description" content={seoData.description} />
+		<meta name="keywords" content={seoData.keywords} />
+		<meta name="author" content="Koshish Family" />
+		<meta name="robots" content="index, follow" />
+		<link rel="canonical" href={seoData.canonical} />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content={seoData.openGraph.type} />
+		<meta property="og:url" content={seoData.openGraph.url} />
+		<meta property="og:title" content={seoData.openGraph.title} />
+		<meta property="og:description" content={seoData.openGraph.description} />
+		<meta property="og:image" content={seoData.openGraph.image} />
+		<meta property="og:site_name" content={seoData.openGraph.siteName} />
+		<meta property="og:locale" content={seoData.openGraph.locale} />
+		
+		<!-- Twitter -->
+		<meta name="twitter:card" content={seoData.twitter.card} />
+		<meta name="twitter:url" content={seoData.openGraph.url} />
+		<meta name="twitter:title" content={seoData.twitter.title} />
+		<meta name="twitter:description" content={seoData.twitter.description} />
+		<meta name="twitter:image" content={seoData.twitter.image} />
+		<meta name="twitter:site" content={seoData.twitter.site} />
+		<meta name="twitter:creator" content={seoData.twitter.creator} />
+		
+		<!-- Additional Meta Tags -->
+		<meta name="theme-color" content="#0F52BA" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+		<meta name="format-detection" content="telephone=no" />
+		
+		<!-- External Resources -->
 		<link
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
 			rel="stylesheet"
 		/>
+		
+		<!-- Structured Data -->
+		<script type="application/ld+json" set:html={JSON.stringify(ORGANIZATION_SCHEMA)} />
+		<script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
 	</head>
 	<body class="text-black font-inter">
 		<Header />
