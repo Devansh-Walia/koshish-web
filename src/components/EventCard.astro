@@ -20,6 +20,9 @@ const { title, date, description, image, new: isNew } = Astro.props;
         src={image}
         alt={title}
         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        loading="lazy"
+        width="400"
+        height="300"
         onerror="this.src='https://placehold.co/600x400?text=Event'"
       />
       {

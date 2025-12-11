@@ -82,6 +82,9 @@ const dynamicStyles = items.map((_, index) => `
                 src={item.image} 
                 alt={item.title}
                 class="rounded-xl shadow-lg w-full h-80 object-cover"
+                loading="lazy"
+                width="400"
+                height="320"
               />
             </div>
           )}

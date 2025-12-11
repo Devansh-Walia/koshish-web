@@ -54,6 +54,10 @@ const pageSchema = generatePageSchema("home");
 		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 		<meta name="format-detection" content="telephone=no" />
 		
+		<!-- Preload critical resources for LCP optimization -->
+		<link rel="preload" as="image" href="/images/bg.jpeg" fetchpriority="high" />
+		<link rel="preload" as="image" href="/images/logo.png" fetchpriority="high" />
+		
 		<!-- Structured Data -->
 		<script type="application/ld+json" set:html={JSON.stringify(ORGANIZATION_SCHEMA)} />
 		<script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
