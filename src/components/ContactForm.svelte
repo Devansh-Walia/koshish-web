@@ -24,11 +24,11 @@
                 setTimeout(() => (success = false), 5000);
             } else {
                 error = true;
-                console.error("Form submission failed:", data);
+                // Form submission failed - error handled by UI state
             }
         } catch (err) {
             error = true;
-            console.error("Form submission error:", err);
+            // Form submission error - error handled by UI state
         } finally {
             isSubmitting = false;
         }

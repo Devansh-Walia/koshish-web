@@ -10,6 +10,7 @@ const seoData = generateMetaTags("contact");
 const pageSchema = generatePageSchema("contact");
 ---
 
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -55,9 +56,11 @@ const pageSchema = generatePageSchema("contact");
     <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
   </head>
   <body class="bg-[#0a0a0a] text-white font-inter selection:bg-primary/30">
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white px-4 py-2 rounded z-50">Skip to main content</a>
     <Header />
     
-    <main class="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <main id="main-content" class="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <!-- Background Elements -->
       <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
         <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[120px] animate-blob"></div>
@@ -78,7 +81,7 @@ const pageSchema = generatePageSchema("contact");
           <!-- Contact Info -->
           <div class="lg:col-span-1 space-y-8">
             <div class="p-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl">
-              <h3 class="text-xl font-semibold text-white mb-4">Contact Information</h3>
+              <h2 class="text-xl font-semibold text-white mb-4">Contact Information</h2>
               <div class="space-y-4">
                 <div class="flex items-start gap-4">
                   <div class="p-3 bg-primary/10 rounded-lg text-primary">
