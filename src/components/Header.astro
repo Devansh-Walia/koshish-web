@@ -1,4 +1,6 @@
 ---
+import { ExternalLinks } from "../data/constants";
+
 const navItems = [
   {
     title: 'Home',
@@ -31,7 +33,7 @@ const currentPath = Astro.url.pathname;
       <a href="/" class="flex items-center gap-2 group">
         <img src="/images/logo.png" loading="lazy" alt="Koshish Family Logo" class="w-12 h-auto transition-transform duration-300 group-hover:scale-110" width="48" height="48">
         <span class="font-heading font-bold text-xl text-gray-900 hidden sm:block">
-          Koshish<span class="text-[var(--color-primary)]">Family</span>
+          Koshish<span class="text-primary">Family</span>
         </span>
       </a>
       
@@ -39,8 +41,8 @@ const currentPath = Astro.url.pathname;
       <div class="hidden md:flex items-center space-x-8">
         {navItems.map((item) => (
           item.subPaths.length > 0 ? (
-            <div class="group relative flex h-full cursor-pointer items-center space-x-1 font-medium text-gray-600 hover:text-[var(--color-primary)] transition-colors py-2">
-              <span class={currentPath.startsWith(item.path) && item.path !== '#' ? 'text-[var(--color-primary)] font-semibold' : ''}>
+            <div class="group relative flex h-full cursor-pointer items-center space-x-1 font-medium text-gray-600 hover:text-primary transition-colors py-2">
+              <span class={currentPath.startsWith(item.path) && item.path !== '#' ? 'text-primary font-semibold' : ''}>
                 {item.title}
               </span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -51,7 +53,7 @@ const currentPath = Astro.url.pathname;
               <div class="absolute top-full right-0 pt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
                 <div class="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden p-2">
                   {item.subPaths.map((subItem) => (
-                    <a href={subItem.path} class="block px-4 py-2 text-sm text-gray-600 rounded-lg hover:bg-blue-50 hover:text-[var(--color-primary)] transition-colors">
+                    <a href={subItem.path} class="block px-4 py-2 text-sm text-gray-600 rounded-lg hover:bg-blue-50 hover:text-primary transition-colors">
                       {subItem.title}
                     </a>
                   ))}
@@ -59,20 +61,20 @@ const currentPath = Astro.url.pathname;
               </div>
             </div>
           ) : (
-            <a href={item.path} class={`font-medium transition-colors hover:text-[var(--color-primary)] ${currentPath === item.path ? 'text-[var(--color-primary)] font-semibold' : 'text-gray-600'}`}>
+            <a href={item.path} class={`font-medium transition-colors hover:text-primary ${currentPath === item.path ? 'text-primary font-semibold' : 'text-gray-600'}`}>
               {item.title}
             </a>
           )
         ))}
         
-        <a href="/donate" class="btn btn-primary btn-sm ml-4">
+        <a href={ExternalLinks.forms.donation} class="btn btn-primary btn-sm ml-4">
           Donate Now
         </a>
       </div>
 
       <!-- Mobile Menu Toggle -->
       <div class="md:hidden">
-        <button id="mobile-menu-toggle" aria-label="Toggle menu" class="p-2 text-gray-600 hover:text-[var(--color-primary)] transition-colors rounded-lg hover:bg-gray-100">
+        <button id="mobile-menu-toggle" aria-label="Toggle menu" class="p-2 text-gray-600 hover:text-primary transition-colors rounded-lg hover:bg-gray-100">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
@@ -82,7 +84,7 @@ const currentPath = Astro.url.pathname;
   </div>
 
   <!-- Mobile Menu Overlay -->
-  <div id="mobile-menu" class="hidden fixed inset-0 z-[100] bg-white transform transition-transform duration-300 md:hidden">
+  <div id="mobile-menu" class="hidden fixed inset-0 z-100 bg-white transform transition-transform duration-300 md:hidden">
     <div class="p-4 flex justify-between items-center border-b border-gray-100 bg-white">
       <span class="font-heading font-bold text-xl text-gray-900">Menu</span>
       <button id="mobile-menu-close" class="p-2 text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-100">
@@ -98,14 +100,14 @@ const currentPath = Astro.url.pathname;
             <div class="font-semibold text-gray-900 px-2">{item.title}</div>
             <div class="pl-4 space-y-2 border-l-2 border-gray-100 ml-2">
               {item.subPaths.map((subItem) => (
-                <a href={subItem.path} class="block px-2 py-2 text-gray-600 hover:text-[var(--color-primary)] hover:bg-blue-50 rounded-lg transition-colors">
+                <a href={subItem.path} class="block px-2 py-2 text-gray-600 hover:text-primary hover:bg-blue-50 rounded-lg transition-colors">
                   {subItem.title}
                 </a>
               ))}
             </div>
           </div>
         ) : (
-          <a href={item.path} class="block px-2 py-3 font-medium text-gray-900 hover:text-[var(--color-primary)] hover:bg-blue-50 rounded-lg transition-colors">
+          <a href={item.path} class="block px-2 py-3 font-medium text-gray-900 hover:text-primary hover:bg-blue-50 rounded-lg transition-colors">
             {item.title}
           </a>
         )

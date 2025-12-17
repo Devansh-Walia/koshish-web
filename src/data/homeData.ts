@@ -1,6 +1,7 @@
 // Home Page Data
 
 import { postion } from "../types/enums";
+import { ExternalLinks } from "./constants";
 
 export const hero = {
   title: "Empowering Underprivileged Children",
@@ -10,8 +11,7 @@ export const hero = {
     "Volunteer and make a difference in the lives of those who need it most",
   backgroundImage: "/images/event/event-4.jpg",
   buttonText: "Join Our Team",
-  buttonLink:
-    "https://docs.google.com/forms/d/e/1FAIpQLSd091F7yX0SJMDXT_eLybLfdX69u54_kKmCAwFaqCqXjuo-Dw/viewform",
+  buttonLink: ExternalLinks.forms.volunteer,
 };
 
 export const kids = [
