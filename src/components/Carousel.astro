@@ -28,6 +28,7 @@ const uniqueId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
         src={img}
         alt={`Slide ${index + 1}`}
         class="w-full h-full object-cover rounded-2xl"
+        loading="lazy"
       />
     </div>
   ))}
