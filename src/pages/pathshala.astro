@@ -76,105 +76,191 @@ const pageSchema = generatePageSchema("pathshala");
 		<Header />
 		
 		<main id="main-content">
-			<!-- Hero Section -->
-			<HeroSection 
-				title={hero.title}
-				subtitle={hero.subtitle}
-				backgroundImage={hero.backgroundImage}
-				buttonText={hero.buttonText}
-				buttonOnClick="document.getElementById('carousel-section').scrollIntoView({ behavior: 'smooth' })"
-			/>
+			<!-- Hero Section - Education is Empowerment Style -->
+			<section class="relative bg-linear-to-r from-blue-600 to-green-500 text-white min-h-[70vh] flex items-center justify-center">
+				<div class="absolute inset-0">
+					<img src={hero.backgroundImage} alt="Education Background" class="w-full h-full object-cover opacity-30" />
+				</div>
+				<div class="relative z-10 text-center px-4">
+					<h1 class="text-4xl md:text-6xl font-bold mb-4 font-jost tracking-wide">
+						EDUCATION IS EMPOWERMENT
+					</h1>
+					<p class="text-xl md:text-2xl font-light">
+						{hero.subtitle}
+					</p>
+				</div>
+			</section>
 
-			<!-- Carousel -->
-			<div id="carousel-section" class="mx-4 md:mx-12 my-12 p-4 rounded-2xl shadow-lg bg-green-300/30">
-				<Carousel images={carouselImages} />
-			</div>
+			<div class="container mx-auto px-4 py-16">
+				<!-- Why Education Section -->
+				<section class="mb-20">
+					<h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-8 font-jost">
+						WHY EDUCATION
+					</h2>
+					<p class="text-lg text-gray-700 leading-relaxed max-w-4xl">
+						If we need to address healthcare, poverty, population control, unemployment and human 
+						rights, there's no better way to start than providing education to children in need. Education 
+						not only empowers children to have a secure future but also helps them grow up as 
+						responsible national and global citizens. The Right to Education (RTE) Act which came into 
+						force in 2010 made education free and compulsory for all children in the age group of 6-14 
+						years. But even a decade later, the learning curve has not been steady for many children in 
+						the country. The socio-economic conditions of parents and lack of proper learning in schools 
+						are hindrances which prevent many children from having education.
+					</p>
+				</section>
 
-			<div class="container mx-auto px-4">
-				<!-- Educational Approach -->
-				<section class="bg-green-300/30 rounded-2xl p-10 mb-16 shadow-lg">
-					<div class="grid md:grid-cols-2 gap-12">
-						<div class="space-y-6">
-							<h2 class="text-3xl font-bold text-gray-800 font-jost">
-								{educationalApproach.heading}
-							</h2>
-							<p class="text-lg text-grey-600">
-								{educationalApproach.description}
-							</p>
-							<ul class="space-y-4 text-grey-600">
-								{educationalApproach.focusAreas.map(area => (
-									<li class="flex items-center">
-										<i class={`${area.icon} text-primary mr-3`}></i>
-										{area.text}
-									</li>
-								))}
-							</ul>
+				<!-- What We Do Section -->
+				<section class="mb-20">
+					<h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-8 font-jost">
+						WHAT WE DO
+					</h2>
+					<p class="text-lg text-gray-700 leading-relaxed max-w-4xl mb-12">
+						Koshish Family's flagship programme Pathshala works with the objective of 
+						empowering underprivileged children by providing education, nutrition, and wellness 
+						opportunities for all. Pathshala works with children (3-18 years) living in difficult 
+						circumstances, children from poor families, differently abled children, disaster-struck 
+						children, abandoned and street children, and children living in tribal belts, remote villages 
+						and hard to reach areas.
+					</p>
+
+					<!-- Program Flow Chart -->
+					<div class="bg-gray-50 rounded-2xl p-8 mb-12">
+						<div class="flex flex-wrap justify-center items-center gap-8">
+							{programs.map((program, index) => (
+								<div class="flex flex-col items-center text-center max-w-xs">
+									<div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-4 border-4 border-green-300">
+										<i class={`${program.icon} text-3xl text-green-600`}></i>
+									</div>
+									<h3 class="font-bold text-gray-800 mb-2 font-jost">{program.title}</h3>
+									<p class="text-sm text-gray-600">{program.description}</p>
+									{index < programs.length - 1 && (
+										<div class="hidden md:block absolute right-0 top-1/2 transform -translate-y-1/2">
+											<i class="fas fa-arrow-right text-green-400 text-2xl"></i>
+										</div>
+									)}
+								</div>
+							))}
 						</div>
-						<div class="grid grid-cols-2 gap-6">
+					</div>
+				</section>
+
+				<!-- 4-Pronged Approach -->
+				<section class="mb-20">
+					<h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-12 font-jost">
+						4-PRONGED APPROACH
+					</h2>
+					<div class="grid md:grid-cols-2 gap-6">
+						{educationalApproach.focusAreas.map((area, index) => {
+							const colors = ['bg-yellow-100 text-yellow-800', 'bg-green-100 text-green-800', 'bg-purple-100 text-purple-800', 'bg-blue-100 text-blue-800'];
+							return (
+								<div class={`${colors[index]} p-6 rounded-lg flex items-center`}>
+									<i class={`${area.icon} text-2xl mr-4`}></i>
+									<span class="font-semibold text-lg">{area.text}</span>
+								</div>
+							);
+						})}
+					</div>
+				</section>
+
+				<!-- Impact 2023-24 -->
+				<section class="mb-20">
+					<h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-12 font-jost">
+						IMPACT 2023-24
+					</h2>
+					<div class="grid md:grid-cols-2 gap-12 items-center">
+						<div class="space-y-8">
+							{impactStats.map((stat, index) => (
+								<div class="flex items-center space-x-6">
+									<div class="text-4xl md:text-6xl font-bold text-green-500">
+										{stat.value}
+									</div>
+									<div>
+										<p class="text-lg font-semibold text-gray-800">{stat.label}</p>
+									</div>
+								</div>
+							))}
+						</div>
+						<div class="grid grid-cols-2 gap-4">
 							{educationalApproach.images.map((img, index) => (
 								<img 
 									src={img} 
 									alt={`Student ${index + 1}`}
-									class="rounded-lg shadow-lg img-hover object-cover w-full h-full"
+									class="rounded-lg shadow-lg object-cover w-full h-48"
 								/>
 							))}
 						</div>
 					</div>
 				</section>
 
-				<!-- Testimonials -->
-				<section class="bg-green-300/30 rounded-2xl p-10 mb-16 space-y-12 shadow-lg">
-					{testimonials.map((testimonial) => (
-						<TestimonialCard 
-							quote={testimonial.quote}
-							author={testimonial.author}
-							image={testimonial.image}
-							imagePosition={testimonial.imagePosition}
-						/>
-					))}
+				<!-- Carousel Gallery -->
+				<section id="carousel-section" class="mb-20">
+					<div class="bg-green-50 rounded-2xl p-8">
+						<h2 class="text-3xl font-bold text-gray-800 mb-6 text-center font-jost">
+							Our Journey in Pictures
+						</h2>
+						<Carousel images={carouselImages} />
+					</div>
 				</section>
 
-				<!-- Programs -->
-				<section class="bg-green-300/30 rounded-xl p-12 mb-16 shadow-lg">
-					<h2 class="text-3xl font-bold text-gray-800 mb-8 text-center font-jost">
-						Our Programs
+				<!-- Stories of Change -->
+				<section class="mb-20">
+					<h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-12 font-jost">
+						STORIES OF CHANGE
 					</h2>
 					<div class="grid md:grid-cols-3 gap-8">
-						{programs.map((program) => (
-							<ProgramCard 
-								icon={program.icon}
-								title={program.title}
-								description={program.description}
-								iconBgColor="bg-indigo-100"
-							/>
+						{testimonials.map((testimonial, index) => (
+							<div class="bg-green-50 rounded-lg p-6">
+								<div class="flex items-center mb-4">
+									<img 
+										src={testimonial.image} 
+										alt={testimonial.author}
+										class="w-16 h-16 rounded-full object-cover mr-4"
+									/>
+									<div>
+										<h3 class="font-bold text-gray-800 font-jost">{testimonial.author}</h3>
+									</div>
+								</div>
+								<p class="text-gray-700 italic">"{testimonial.quote}"</p>
+							</div>
 						))}
 					</div>
 				</section>
 
-				<!-- Impact Stats -->
-				<section class="bg-green-300/30 rounded-2xl p-10 mb-16 shadow-lg">
-					<h2 class="text-3xl font-bold text-gray-800 mb-8 text-center font-jost">
-						Our Impact
+				<!-- Change That Inspires Us -->
+				<section class="mb-20">
+					<h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-12 text-center font-jost">
+						CHANGE THAT INSPIRES US
 					</h2>
-					<StatsGrid stats={impactStats} />
-				</section>
-
-				<!-- CTA Section -->
-				<section class="bg-green-300/30 rounded-2xl p-10 mb-16 shadow-lg text-center">
-					<h2 class="brush-underline text-4xl font-bold text-gray-800 mb-6 font-jost">
-						{cta.heading}
-					</h2>
-					<p class="text-xl text-grey-600 mb-8 max-w-3xl mx-auto">
-						{cta.description}
-					</p>
-					<a
-						href={cta.buttonLink}
-						target="_blank"
-						rel="noopener noreferrer"
-						class="ripple-button inline-block text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 bg-[#0F52BA] hover:bg-blue-700"
-					>
-						{cta.buttonText}
-					</a>
+					<div class="grid md:grid-cols-2 gap-8">
+						<div class="bg-linear-to-br from-blue-50 to-green-50 rounded-xl p-8">
+							<h3 class="text-2xl font-bold text-gray-800 mb-4 font-jost">Our Mission</h3>
+							<p class="text-gray-700 mb-6">
+								{educationalApproach.description}
+							</p>
+							<div class="space-y-3">
+								{educationalApproach.focusAreas.slice(0, 2).map(area => (
+									<div class="flex items-center">
+										<i class={`${area.icon} text-blue-500 mr-3`}></i>
+										<span class="text-gray-700">{area.text}</span>
+									</div>
+								))}
+							</div>
+						</div>
+						<div class="bg-linear-to-br from-green-50 to-yellow-50 rounded-xl p-8">
+							<h3 class="text-2xl font-bold text-gray-800 mb-4 font-jost">Join Our Community</h3>
+							<p class="text-gray-700 mb-6">
+								{cta.description}
+							</p>
+							<a
+								href={cta.buttonLink}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300"
+							>
+								{cta.buttonText}
+							</a>
+						</div>
+					</div>
 				</section>
 			</div>
 		</main>

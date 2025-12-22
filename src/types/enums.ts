@@ -1,4 +1,4 @@
 export enum postion {
-    left = 'left',
-    right = 'right'
+  left = "left",
+  right = "right",
 }
