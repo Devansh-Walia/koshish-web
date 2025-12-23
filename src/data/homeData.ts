@@ -8,7 +8,7 @@ export const hero = {
   subtitle:
     "We are dedicated to helping children gain education and develop their overall skills",
   description:
-    "Volunteer and make a difference in the lives of those who need it most",
+    "Volunteer and make a difference in the lives of those who need it most.",
   backgroundImage: "/images/event/event-4.jpg",
   buttonText: "Join Our Team",
   buttonLink: ExternalLinks.forms.volunteer,
@@ -18,28 +18,28 @@ export const kids = [
   {
     name: "Bharti",
     description:
-      "A college going smart and sweet intelligent girl with a very creative mind. Being the eldest she is always up for any responsibilities and us growing really gracefully.",
+      "A college-going Smart and Sweet Intelligent girl with a very Creative mind. Being the eldest, she is always up for any responsibilities and is growing really gracefully.",
     image: "/images/kids/bharti.jpeg",
     imagePosition: postion.left,
   },
   {
     name: "Arjun",
     description:
-      "Arjun, a quite, shy and soft hearted boy always ready to help. Smile is his trademark and it suits him the most. Starting his new phase of life after 12th let's wish a lot of luck.",
+      "Arjun, a Quiet, Shy, and Soft-hearted boy, is always ready to help. A Smile is his trademark, and it suits him the most. Starting his new phase of life after 12th, let's wish him a lot of luck.",
     image: "/images/kids/arjun.jpeg",
     imagePosition: postion.right,
   },
   {
     name: "Ramesh",
     description:
-      "Ramesh our mechanical boy and ITI student. Love, Respect, Leadership and Cooperativeness is what makes him loved by all and genuineness is what lies in his heart.",
+      "Ramesh, our mechanical boy and ITI student. Love, Respect, Leadership, and Cooperativeness are what make him loved by all, and genuineness is what lies in his heart.",
     image: "/images/kids/ramesh.jpeg",
     imagePosition: postion.left,
   },
   {
     name: "Reena",
     description:
-      "Our shy girl Reena currently studying in class 9th.A very sweet and simple kid with a very attractive aura which makes her loved by all.She dreams big and hope they'll become true.",
+      "Our shy girl Reena is currently studying in class 9th. A very Sweet and Simple kid with a very Attractive aura, which makes her loved by all. She dreams big and hopes they'll become true.",
     image: "/images/kids/reena.jpeg",
     imagePosition: postion.right,
   },
@@ -50,12 +50,12 @@ export const timelineData = [
     year: 2012,
     title: "प्रारंभिक (Beginning)",
     details:
-      "Journey started with teaching One kid. Raised Funds for him by selling handmade cards outside College canteen. Gave our efforts a name 'Koshish'",
+      "The journey started with teaching One kid. Raised Funds for him by selling handmade cards outside the College canteen. Gave our efforts a name, 'Koshish'",
     image: "/images/timeline/2012.jpg",
   },
   {
     year: 2013,
-    title: "इक्शणा ( Vision)",
+    title: "इक्शणा (Vision)",
     details:
       "Created a Vision of providing education for the underprivileged kids, added more kids and members to Koshish and made it a family.",
     image: "/images/timeline/2013.jpg",
@@ -64,84 +64,84 @@ export const timelineData = [
     year: 2014,
     title: "साक्षरता (Education)",
     details:
-      "Started Sending all kids to school taking care of their basic necessities and started celebrating major festivals likes Holi, Diwali, Rakhi, etc.",
+      "Started Sending all kids to school, taking care of their basic necessities, and starting to celebrate major festivals like Holi, Diwali, Rakhi, etc.",
     image: "/images/timeline/2014.jpg",
   },
   {
     year: 2015,
     title: "उदय (Rise)",
     details:
-      "Became a fully organized team, recruiting members from all over the city running campaigns like Installation of Dustbins, Distribution Drives and Craft Events.",
+      "Became a fully organized team, recruiting members from all over the city and running campaigns like Installation of Dustbins, Distribution Drives, and Craft Events.",
     image: "/images/timeline/2015.jpg",
   },
   {
     year: 2016,
     title: "संवर्धनम् (Care)",
     details:
-      "Took one step ahead in taking responsibilities of our kids' health, hygiene, and sanitation. Started organizing Health and Dental Camps for Kids and members.",
+      "Took one step ahead in taking responsibilities for our kids' health, hygiene, and sanitation. Started organizing Health and Dental Camps for Kids and members.",
     image: "/images/timeline/2016.jpg",
   },
   {
     year: 2017,
     title: "वितरणम् (Distribution)",
     details:
-      "Visited Orphanage for the first time. Started organizing fruits and clothes distribution drives",
+      "Visited the Orphanage for the first time. Started organizing fruits and clothes distribution drives.",
     image: "/images/timeline/2017.jpg",
   },
   {
     year: 2018,
-    title: "सफलता ( Success)",
+    title: "सफलता (Success)",
     details:
-      "First batch of Kids completed their board exams. Planned Kids Annual Trips to Museums, Zoos, etc",
+      "The First batch of Kids completed their board exams. Planned Kids' Annual Trips to Museums, Zoos, etc.",
     image: "/images/timeline/2018.jpg",
   },
   {
     year: 2019,
-    title: "सहकारिन् ( Collaboration )",
+    title: "सहकारिन् (Collaboration)",
     details:
       "Collaboration with other NGOs and societies to help the needy and grow in the process",
     image: "/images/timeline/2019.jpg",
   },
   {
     year: 2020,
-    title: "आलम्बन ( Foundation)",
+    title: "आलम्बन (Foundation)",
     details:
-      "First Kid sent for Graduation fully sponsored by Koshish Family. Organized Digital classes during Covid Pandemic for all our kids.",
+      "The First Kid was sent for Graduation fully sponsored by the Koshish Family. Organized Digital classes during the Covid pandemic for all our kids.",
     image: "/images/timeline/2020.jpg",
   },
   {
     year: 2021,
-    title: "प्रयुक्तिः ( Event)",
+    title: "प्रयुक्तिः (Event)",
     details:
       "Awareness Sessions, Summer Camps, Art n Craft Competitions, Yoga Sessions started on a regular basis.",
     image: "/images/timeline/2021.jpg",
   },
   {
     year: 2022,
-    title: "पाठशाला ( Aashiyana)",
+    title: "पाठशाला (Aashiyana)",
     details:
-      'Koshish Family Completed 10 years. "Aashiyana" a place to study and grow with full amenities was created for Koshish Kids',
+      'Koshish Family Completed 10 years. "Aashiyana," a place to study and grow with full amenities, was created for Koshish Kids.',
     image: "/images/timeline/2022.jpg",
   },
   {
     year: 2023,
-    title: "पञ्चिका ( Registered)",
+    title: "पञ्चिका (Registered)",
     details:
-      "Koshish Family is registered with high hopes of improving lives with the mission to get formal education for all underprivileged Koshish Kids",
+      "Koshish Family is registered with high hopes of improving lives with the mission to get formal education for all underprivileged Koshish Kids.",
     image: "/images/timeline/2023.jpg",
   },
   {
     year: 2024,
     title: "उन्नति (Unnati)",
     details:
-      "First Kid graduated from Koshish Family after 12 years i.e.Bharti. She did her paid internship as a teacher in Scottish Academy Dehradun. We expanded to other areas of Doon.",
+      "The First Kid graduated from Koshish Family after 12 years, i.e., Bharti. She did her paid internship as a teacher at Scottish Academy Dehradun. We expanded to other areas of Doon.",
     image: "/images/timeline/2024.jpeg",
   },
   {
     year: 2025,
     title: "कौशल (Kaushala)",
     details:
-      "Skill is the tool for success. Now, Koshish Kids are learning skills at the skill centre for better Job opportunities. Arjun, another graduate in the Koshish Family.",
+      "Skill is the tool for success. Now, Koshish Kids are learning skills at the skill center for better Job opportunities. Arjun, another graduate in the Koshish Family.",
     image: "/images/timeline/2025.jpeg",
   },
 ];
@@ -199,7 +199,7 @@ export const events = [
     image: "/images/event/event-8.jpg",
   },
   {
-    title: "Mussorie Trip",
+    title: "Mussoorie Trip",
     date: "January 2022",
     image: "/images/event/event-9.jpg",
   },
