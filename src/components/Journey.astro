@@ -4,7 +4,7 @@ import { timelineData } from "../data/homeData";
 
 <section
   id="journey"
-  class="section-spacing bg-[var(--color-primary)] text-white relative overflow-hidden"
+  class="section-spacing bg-primary text-white relative overflow-hidden"
 >
   <!-- Background Pattern -->
   <div class="absolute inset-0 opacity-10">
@@ -39,14 +39,14 @@ import { timelineData } from "../data/homeData";
       >
         <!-- Connecting Line (Horizontal) -->
         <div
-          class="absolute top-1/2 left-0 right-0 h-1 bg-[var(--color-primary-light)]/30 -translate-y-1/2 rounded-full min-w-full"
+          class="absolute top-1/2 left-0 right-0 h-1 bg-primary-light/30 -translate-y-1/2 rounded-full min-w-full"
         >
         </div>
 
-        <div class="flex gap-8 min-w-max px-4">
+        <div class="flex gap-8 min-w-max pl-8 pr-4">
           {
             timelineData.map((item, index) => (
-              <div class="relative group flex-shrink-0 w-80 py-10">
+              <div class="relative group shrink-0 w-80 py-10">
                 <div class="absolute top-10 right-10 w-4 h-4 bg-white rounded-full -translate-x-1/2 -translate-y-1/2 z-10 shadow-[0_0_0_8px_rgba(33,150,243,0.5)] group-hover:scale-125 transition-transform duration-300" />
                 <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 hover:-translate-y-2">
                   <div class="text-4xl font-bold text-amber-400 mb-2">
@@ -63,29 +63,49 @@ import { timelineData } from "../data/homeData";
     </div>
 
     <script>
-      // Auto-scroll functionality
       const container = document.getElementById("timeline-container");
       let isUserScrolling = false;
       let scrollTimeout: number | undefined;
+      let animationId: number;
+      let startTime: number;
+      let isPaused = false;
 
       if (container) {
-        // Auto-scroll at a slow pace
-        const autoScroll = () => {
-          if (!isUserScrolling && container) {
+        const scrollSpeed = 0.5;
+        const pauseDuration = 2000;
+        
+        const smoothAutoScroll = (timestamp: number) => {
+          if (!startTime) startTime = timestamp;
+          
+          if (!isUserScrolling && container && !isPaused) {
             const maxScroll = container.scrollWidth - container.clientWidth;
             const currentScroll = container.scrollLeft;
 
-            if (currentScroll >= maxScroll) {
-              // Reset to start
-              container.scrollLeft = 0;
+            if (currentScroll >= maxScroll - 1) {
+              isPaused = true;
+
+              setTimeout(() => {
+                if (container) {
+                  setTimeout(() => {
+                    if (container) {
+                      container.style.scrollBehavior = 'smooth';
+                      isPaused = false;
+                      startTime = 0;
+                      container.scrollLeft = 0;
+                    }
+                  }, 1000);
+                }
+              }, pauseDuration);
             } else {
-              // Scroll slowly
-              container.scrollLeft += 1;
+              container.scrollLeft += scrollSpeed;
             }
           }
+          
+          animationId = requestAnimationFrame(smoothAutoScroll);
         };
 
-        const scrollInterval = setInterval(autoScroll, 30);
+        // Start the animation
+        animationId = requestAnimationFrame(smoothAutoScroll);
 
         // Pause auto-scroll when user interacts
         container.addEventListener("mouseenter", () => {
@@ -108,6 +128,12 @@ import { timelineData } from "../data/homeData";
           scrollTimeout = window.setTimeout(() => {
             isUserScrolling = false;
           }, 2000);
+        });
+
+        window.addEventListener('beforeunload', () => {
+          if (animationId) {
+            cancelAnimationFrame(animationId);
+          }
         });
       }
     </script>
