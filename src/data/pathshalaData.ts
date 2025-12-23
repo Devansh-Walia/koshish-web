@@ -57,27 +57,27 @@ export const testimonials = [
     quote:
       "Every child deserves a chance to shine, and every effort we make brings them closer to their dreams",
     author: "Anisha Bharti",
-    image: "/images/kids/arjun.jpeg",
+    image: "/images/pathshala/teachers/Anisha.jpeg",
     imagePosition: postion.left,
   },
   {
     quote:
       "Before we ask children what they want to become, we must first teach them how to dream.",
     author: "Md Qasim",
-    image: "/images/kids/arjun.jpeg",
+    image: "/images/pathshala/teachers/qasim.jpeg",
     imagePosition: postion.right,
   },
   {
     quote: "We don't just teach...we listen, guide and grow together.",
     author: "Ainakshi",
-    image: "/images/kids/arjun.jpeg",
+    image: "/images/pathshala/teachers/ainakshi.jpeg",
     imagePosition: postion.left,
   },
   {
     quote:
       "Devil is the biggest teacher... It will come at your worst phase and will teach you the toughest lessons of life... Angels might come or not but Devil will.",
     author: "Amit Raj Singh",
-    image: "/images/kids/arjun.jpeg",
+    image: "/images/pathshala/teachers/amit.jpeg",
     imagePosition: postion.right,
   },
 ];
