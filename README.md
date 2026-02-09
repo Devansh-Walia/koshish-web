@@ -41,3 +41,14 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+# how to run
+
+1. one time needed
+   `npm i`
+
+2. all the time
+   `npm run dev`
+
+3. to format before pushing
+   `npm run format`
