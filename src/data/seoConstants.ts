@@ -86,6 +86,21 @@ export const KEYWORDS = {
     "partnership",
     "get involved",
   ],
+  donate: [
+    "donate",
+    "donation",
+    "UPI donation",
+    "QR code donation",
+    "support children",
+    "give back",
+  ],
+  challenge: [
+    "university challenge",
+    "DIT University",
+    "donation tracker",
+    "fundraising challenge",
+    "contribution dashboard",
+  ],
 } as const;
 
 export const SEO_PAGES = {
@@ -135,6 +150,24 @@ export const SEO_PAGES = {
     keywords: [...KEYWORDS.global, ...KEYWORDS.contact].join(", "),
     image: "/images/logo.png",
     url: "/contact",
+    type: "webpage",
+  },
+  donate: {
+    title: "Donate - Support Underprivileged Children | Koshish Family",
+    description:
+      "Scan a QR code and donate via UPI to support underprivileged children. Pick an emoji, choose an amount, and track the total raised live.",
+    keywords: [...KEYWORDS.global, ...KEYWORDS.donate].join(", "),
+    image: "/images/logo.png",
+    url: "/donate",
+    type: "webpage",
+  },
+  challenge: {
+    title: "DIT University Challenge - Donation Tracker | Koshish Family",
+    description:
+      "Track every donation and contribution made by DIT University to Koshish Family. See live totals, category breakdowns, and progress towards the goal.",
+    keywords: [...KEYWORDS.global, ...KEYWORDS.challenge].join(", "),
+    image: "/images/logo.png",
+    url: "/challenge",
     type: "webpage",
   },
 } as const;

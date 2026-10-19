@@ -20,6 +20,11 @@ const navItems = [
     title: 'Contact Us',
     path: '/contact',
     subPaths: []
+  },
+  {
+    title: 'Challenge',
+    path: '/challenge',
+    subPaths: []
   }
 ];
 
@@ -67,7 +72,7 @@ const currentPath = Astro.url.pathname;
           )
         ))}
         
-        <a href={ExternalLinks.forms.donation} class="btn btn-primary btn-sm ml-4">
+        <a href="/donate" class="btn btn-primary btn-sm ml-4">
           Donate Now
         </a>
       </div>
