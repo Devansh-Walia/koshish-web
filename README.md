@@ -1,54 +1,73 @@
-# Astro Starter Kit: Minimal
+# Koshish Family — Website
+
+Source for [koshishfamily.org](https://koshishfamily.org), the website of **Koshish Family**, a Dehradun-based non-profit that helps underprivileged children through education (Pathshala), art & craft, and community drives.
+
+Built with [Astro](https://astro.build), [Svelte](https://svelte.dev) (interactive islands) and [Tailwind CSS v4](https://tailwindcss.com).
+
+## Getting started
+
+**Requirements:** Node.js `>= 22.22` (Astro 7 needs it), npm `>= 9.6.5`.
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install     # once
+npm run dev     # local dev server at http://localhost:4321
+npm run format  # format with Prettier before pushing
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Commands
 
-## 🚀 Project Structure
+| Command           | Action                                          |
+| :---------------- | :---------------------------------------------- |
+| `npm run dev`     | Start the dev server at `localhost:4321`        |
+| `npm run build`   | Build the production site to `./dist/`          |
+| `npm run preview` | Preview the production build locally            |
+| `npm run lint`    | Type-check the project (`astro check`)          |
+| `npm run format`  | Format all files with Prettier                  |
+| `npm run astro`   | Run Astro CLI commands (`astro add`, etc.)      |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Pages
+
+| Route             | Description                                                     |
+| :---------------- | :-------------------------------------------------------------- |
+| `/`               | Home: hero, journey timeline, stats, events, testimonials       |
+| `/pathshala`      | Pathshala education program and teachers                        |
+| `/art-and-craft`  | Art & craft programs and products made by the kids              |
+| `/collectdkure`   | Collect–Distribute "Kure" donation drive                        |
+| `/donate`         | Donation page with UPI QR and live donation tracker             |
+| `/challenge`      | DIT University "5000 Lights of Kindness" points dashboard       |
+| `/contact`        | Contact form and map                                            |
+
+## Project structure
 
 ```text
 /
-├── public/
+├── public/              # Static assets (images, favicon, robots.txt, sitemap.xml, _headers)
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/      # Astro + Svelte components (Header, Footer, Hero, dashboards…)
+│   ├── data/            # Page content and constants — edit these to update copy
+│   ├── lib/             # Shared client-side logic (e.g. donation.ts cookie tracking)
+│   ├── pages/           # One file per route
+│   ├── styles/          # Global CSS (Tailwind)
+│   └── types/           # Shared TypeScript types/enums
+├── astro.config.mjs     # Astro config (Svelte, Tailwind, compression, Terser)
+└── .github/workflows/   # GitHub Pages deploy workflow
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### Updating content
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Most text, images and links live in `src/data/`, not in the pages:
 
-Any static assets, like images, can be placed in the `public/` directory.
+- `constants.ts` — contact details and external links
+- `seoConstants.ts` — site metadata, organization info for SEO
+- `homeData.ts`, `pathshalaData.ts`, `artAndCraftData.ts`, `collectDistributionKureData.ts`, `donateData.ts` — per-page content
+- `challengeData.ts` — challenge goal, deadline, tagline and point sources
 
-## 🧞 Commands
+### Donation & challenge tracking
 
-All commands are run from the root of the project, from a terminal:
+`/donate` and `/challenge` share live totals through browser cookies (see `src/lib/donation.ts`). This is **client-only** — figures are stored per browser, not on a server. Points: ₹100 donated/sold = 1 point, each Insta/YT follow = 1 point, each game participant = 1 point.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Deployment
 
-## 👀 Want to learn more?
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which installs dependencies, runs `npm run lint`, builds with Astro and deploys `dist/` to GitHub Pages.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-# how to run
-
-1. one time needed
-   `npm i`
-
-2. all the time
-   `npm run dev`
-
-3. to format before pushing
-   `npm run format`
+The production build compresses HTML/CSS/JS/images/SVG (`astro-compress`) and strips `console`/`debugger` calls via Terser.
