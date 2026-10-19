@@ -100,6 +100,8 @@ export const KEYWORDS = {
     "donation tracker",
     "fundraising challenge",
     "contribution dashboard",
+    "lights of kindness",
+    "diwali challenge",
   ],
 } as const;
 
@@ -162,9 +164,9 @@ export const SEO_PAGES = {
     type: "webpage",
   },
   challenge: {
-    title: "DIT University Challenge - Donation Tracker | Koshish Family",
+    title: "5000 Lights of Kindness - DIT University Challenge | Koshish Family",
     description:
-      "Track every donation and contribution made by DIT University to Koshish Family. See live totals, category breakdowns, and progress towards the goal.",
+      "Can DIT create 5k moments of kindness this Diwali? Track donations, sales, follows and game participation towards 5000 lights of kindness.",
     keywords: [...KEYWORDS.global, ...KEYWORDS.challenge].join(", "),
     image: "/images/logo.png",
     url: "/challenge",

@@ -35,8 +35,8 @@ export default defineConfig({
       },
       rollupOptions: {
         output: {
-          manualChunks: {
-            vendor: ["astro"],
+          manualChunks(id) {
+            if (id.includes("node_modules/astro")) return "vendor";
           },
         },
       },

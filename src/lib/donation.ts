@@ -67,7 +67,7 @@ export function formatINR(amount: number): string {
   }).format(amount);
 }
 
-/** Format a number as challenge points. */
+/** Format a number as challenge lights (moments of kindness). */
 export function formatPoints(amount: number): string {
-  return `${new Intl.NumberFormat("en-IN").format(amount)} pts`;
+  return `${new Intl.NumberFormat("en-IN").format(amount)} lights`;
 }

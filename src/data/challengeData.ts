@@ -2,15 +2,15 @@
 
 export const CHALLENGE = {
   university: "DIT University",
-  /** Overall goal for the challenge, in points. */
+  title: "5000 Lights of Kindness",
+  /** Overall goal for the challenge, in lights (moments of kindness). */
   goal: 5000,
   /**
    * Deadline for the challenge (ISO string). The mock says "complete in
-   * 2 days" — update this to the real end date/time.
+   * 2 days" — update this to the real end date/time (Diwali).
    */
   deadline: "2026-10-21T23:59:59",
-  tagline:
-    "Earn points for DIT University — every action counts towards the goal.",
+  tagline: "Can DIT create 5k moments of kindness this Diwali?",
 };
 
 /**
