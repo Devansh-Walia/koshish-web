@@ -10,7 +10,11 @@ export default defineConfig({
   integrations: [
     svelte(),
     compress({
-      CSS: true,
+      // Disabled: astro-compress's CSS minifier (csso) strips Tailwind v4's
+      // range media queries (`@media (width>=48rem)`), which removes every
+      // sm:/md:/lg: breakpoint and forces the mobile layout everywhere.
+      // Vite already minifies CSS during the build.
+      CSS: false,
       HTML: true,
       Image: true,
       JavaScript: true,
