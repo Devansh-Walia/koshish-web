@@ -2,6 +2,9 @@
 //
 // Each predefined QR code maps to a fixed amount (₹) and an emoji, matching
 // the files placed in public/images/qr/ (e.g. "50 - ☺️.png" → 50.png).
+//
+// NOTE: ids + amounts are mirrored in /firestore.rules (`emoji_<id>` and the
+// donation() checks). If you add or change a QR option, update the rules too.
 
 export interface QrOption {
   id: string;

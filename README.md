@@ -45,7 +45,7 @@ npm run format  # format with Prettier before pushing
 ├── src/
 │   ├── components/      # Astro + Svelte components (Header, Footer, Hero, dashboards…)
 │   ├── data/            # Page content and constants — edit these to update copy
-│   ├── lib/             # Shared client-side logic (e.g. donation.ts cookie tracking)
+│   ├── lib/             # Shared client logic (tracking.ts = Firestore totals, donation.ts = formatting)
 │   ├── pages/           # One file per route
 │   ├── styles/          # Global CSS (Tailwind)
 │   └── types/           # Shared TypeScript types/enums
@@ -64,7 +64,18 @@ Most text, images and links live in `src/data/`, not in the pages:
 
 ### Donation & challenge tracking
 
-`/donate` and `/challenge` share live totals through browser cookies (see `src/lib/donation.ts`). This is **client-only** — figures are stored per browser, not on a server. Points: ₹100 donated/sold = 1 point, each Insta/YT follow = 1 point, each game participant = 1 point.
+Totals for `/donate` and `/challenge` live in a single Firestore document (`challenge/totals`) and update live on every device (see `src/lib/tracking.ts`). Points: ₹100 donated/sold = 1 point, each Insta/YT follow = 1 point, each game participant = 1 point.
+
+If no Firebase config is set (e.g. local dev without `.env`), the site falls back to **browser-only** mode (localStorage) and shows an "Offline mode" notice.
+
+**Setup (one time):**
+
+1. Create a Firebase project → add a **Web app** → enable **Firestore** (production mode).
+2. Deploy the rules: paste `firestore.rules` into Firestore → Rules, or run `npx firebase-tools deploy --only firestore:rules --project <project-id>`.
+3. Local dev: copy `.env.example` to `.env` and fill in the web config.
+4. Deployment: add the same four `PUBLIC_FIREBASE_*` values under GitHub repo **Settings → Secrets and variables → Actions → Variables**.
+
+The web config is public by design. Security comes from `firestore.rules`: anyone can read the totals, but writes can only add one capped item at a time (a sale of ₹1–₹1,00,000, +1 follow, +1 participant, or one QR donation of its exact amount). Nothing can be lowered, reset or deleted. If you change the QR options in `src/data/donateData.ts`, update the rules to match.
 
 ## Deployment
 

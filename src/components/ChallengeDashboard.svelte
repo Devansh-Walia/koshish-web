@@ -2,17 +2,15 @@
   import { onMount } from "svelte";
   import { CHALLENGE } from "../data/challengeData";
   import { ExternalLinks } from "../data/constants";
+  import { rupeesToPoints, formatINR, formatPoints } from "../lib/donation";
   import {
-    SALES_COOKIE,
-    FOLLOWS_COOKIE,
-    GAME_COOKIE,
-    getCookieNumber,
-    addToCookie,
-    getDonationTotal,
-    rupeesToPoints,
-    formatINR,
-    formatPoints,
-  } from "../lib/donation";
+    subscribeTotals,
+    recordSale as saveSale,
+    recordFollow,
+    recordGameParticipant,
+    isShared,
+    MAX_SALE,
+  } from "../lib/tracking";
 
   const FOLLOWED_KEY = "koshish_followed_socials";
 
@@ -20,6 +18,7 @@
   let follows = $state(0);
   let game = $state(0);
   let donationTotal = $state(0);
+  let error = $state<string | null>(null);
 
   let saleInput = $state("");
   let followed = $state<{ instagram: boolean; youtube: boolean }>({
@@ -31,15 +30,28 @@
   let timer: number | undefined;
 
   onMount(() => {
-    salesTotal = getCookieNumber(SALES_COOKIE);
-    follows = getCookieNumber(FOLLOWS_COOKIE);
-    game = getCookieNumber(GAME_COOKIE);
-    donationTotal = getDonationTotal();
     loadFollowed();
+    const unsubscribe = subscribeTotals(
+      (totals) => {
+        salesTotal = totals.sales;
+        follows = totals.follows;
+        game = totals.game;
+        donationTotal = totals.donations;
+      },
+      () => (error = "Couldn't load live totals. Check your connection."),
+    );
 
     timer = window.setInterval(() => (now = Date.now()), 1000);
-    return () => window.clearInterval(timer);
+    return () => {
+      unsubscribe();
+      window.clearInterval(timer);
+    };
   });
+
+  function run(action: Promise<void>) {
+    error = null;
+    action.catch(() => (error = "Couldn't save that. Please try again."));
+  }
 
   function loadFollowed() {
     try {
@@ -55,21 +67,25 @@
   }
 
   function recordSale() {
-    const amount = Math.max(0, Math.round(parseFloat(saleInput) || 0));
+    const amount = Math.round(parseFloat(saleInput) || 0);
     if (amount <= 0) return;
-    salesTotal = addToCookie(SALES_COOKIE, amount);
+    if (amount > MAX_SALE) {
+      error = `A single sale can be at most ${formatINR(MAX_SALE)}.`;
+      return;
+    }
+    run(saveSale(amount));
     saleInput = "";
   }
 
   function follow(social: "instagram" | "youtube") {
     if (followed[social]) return;
-    follows = addToCookie(FOLLOWS_COOKIE, 1);
+    run(recordFollow());
     followed = { ...followed, [social]: true };
     saveFollowed();
   }
 
   function addParticipant() {
-    game = addToCookie(GAME_COOKIE, 1);
+    run(recordGameParticipant());
   }
 
   // Points per source
@@ -106,6 +122,15 @@
 </script>
 
 <section>
+  {#if error}
+    <p class="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" role="alert">
+      {error}
+    </p>
+  {:else if !isShared}
+    <p class="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+      Offline mode: totals are saved in this browser only.
+    </p>
+  {/if}
   <div class="grid lg:grid-cols-3 gap-6 items-stretch">
     <!-- Left column: sale + follows -->
     <div class="grid gap-6">
@@ -122,6 +147,7 @@
             <input
               type="number"
               min="1"
+              max={MAX_SALE}
               placeholder="Sale amount"
               bind:value={saleInput}
               class="w-full rounded-xl border-2 border-gray-200 pl-9 pr-4 py-2.5 focus:outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-blue-100 transition-all"
@@ -303,7 +329,7 @@
           <span class="text-3xl">💝</span>
           <h2 class="heading-sm">Donation</h2>
         </div>
-        <p class="text-body mb-4">₹100 = 1 point, auto from donations.</p>
+        <p class="text-body mb-4">₹100 = 1 point, from donations on the Donate page.</p>
         <a href="/donate" class="btn btn-outline mb-4">Go to Donate</a>
         <div class="flex items-center justify-between text-sm">
           <span class="text-gray-500">{formatINR(donationTotal)} donated</span>

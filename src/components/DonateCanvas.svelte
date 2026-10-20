@@ -1,32 +1,25 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { QR_OPTIONS, type QrOption } from "../data/donateData";
-  import { getDonationTotal, addDonation, formatINR } from "../lib/donation";
-
-  const EMOJI_COUNTS_KEY = "koshish_emoji_counts";
+  import { formatINR } from "../lib/donation";
+  import { subscribeTotals, recordDonation, isShared } from "../lib/tracking";
 
   let total = $state(0);
+  /** Donation count per QR option id (shared across devices). */
   let emojiCounts = $state<Record<string, number>>({});
   let selected = $state<QrOption | null>(null);
   let justAdded = $state<string | null>(null);
+  let error = $state<string | null>(null);
 
-  onMount(() => {
-    total = getDonationTotal();
-    loadCounts();
-  });
-
-  function loadCounts() {
-    try {
-      const raw = localStorage.getItem(EMOJI_COUNTS_KEY);
-      emojiCounts = raw ? JSON.parse(raw) : {};
-    } catch {
-      emojiCounts = {};
-    }
-  }
-
-  function saveCounts() {
-    localStorage.setItem(EMOJI_COUNTS_KEY, JSON.stringify(emojiCounts));
-  }
+  onMount(() =>
+    subscribeTotals(
+      (totals) => {
+        total = totals.donations;
+        emojiCounts = totals.emojis;
+      },
+      () => (error = "Couldn't load live totals. Check your connection."),
+    ),
+  );
 
   function openModal(option: QrOption) {
     selected = option;
@@ -38,17 +31,17 @@
 
   function confirmDonation() {
     if (!selected) return;
-    total = addDonation(selected.amount);
-    emojiCounts[selected.emoji] = (emojiCounts[selected.emoji] ?? 0) + 1;
-    emojiCounts = { ...emojiCounts };
-    saveCounts();
+    error = null;
+    recordDonation(selected.id).catch(
+      () => (error = "Couldn't record your donation. Please try again."),
+    );
     justAdded = selected.emoji;
     closeModal();
     setTimeout(() => (justAdded = null), 2500);
   }
 
-  function countFor(emoji: string): number {
-    return emojiCounts[emoji] ?? 0;
+  function countFor(option: QrOption): number {
+    return emojiCounts[option.id] ?? 0;
   }
 
   // Emojis grow in size as they receive more donations.
@@ -58,7 +51,7 @@
   }
 
   const activeEmojis = $derived(
-    QR_OPTIONS.filter((option) => countFor(option.emoji) > 0),
+    QR_OPTIONS.filter((option) => countFor(option) > 0),
   );
 </script>
 
@@ -75,7 +68,11 @@
         {formatINR(total)}
       </p>
     </div>
-    {#if justAdded}
+    {#if error}
+      <span class="rounded-full bg-red-500/90 px-4 py-2 text-sm font-medium" role="alert">
+        {error}
+      </span>
+    {:else if justAdded}
       <span
         class="inline-flex items-center gap-2 rounded-full bg-white/15 border border-white/20 px-4 py-2 text-sm font-medium animate-fade-in"
       >
@@ -104,11 +101,11 @@
             <span class="text-xs font-semibold text-gray-500 group-hover:text-[var(--color-primary)]">
               ₹{option.amount}
             </span>
-            {#if countFor(option.emoji) > 0}
+            {#if countFor(option) > 0}
               <span
                 class="absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-[var(--color-primary)] text-white text-[11px] font-bold flex items-center justify-center"
               >
-                {countFor(option.emoji)}
+                {countFor(option)}
               </span>
             {/if}
           </button>
@@ -142,14 +139,14 @@
             >
               <span
                 class="leading-none drop-shadow-sm"
-                style={`font-size: ${emojiSize(countFor(option.emoji))}px`}
+                style={`font-size: ${emojiSize(countFor(option))}px`}
               >
                 {option.emoji}
               </span>
               <span
                 class="rounded-full bg-gray-900/70 text-white text-xs font-semibold px-2 py-0.5"
               >
-                ×{countFor(option.emoji)}
+                ×{countFor(option)}
               </span>
             </div>
           {/each}
@@ -201,7 +198,9 @@
         Done
       </button>
       <p class="text-xs text-gray-400 mt-3">
-        Tapping “Done” records your donation in this browser.
+        {isShared
+          ? "Tapping “Done” adds your donation to the live total."
+          : "Tapping “Done” records your donation in this browser."}
       </p>
     </div>
   </div>

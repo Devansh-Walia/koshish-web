@@ -16,6 +16,7 @@
     "@tailwindcss/vite": "^4.1.17",
     "astro": "^7.4.1",
     "astro-compress": "^2.3.8",
+    "firebase": "^12.19.0",
     "svelte": "^5.43.14",
     "tailwindcss": "^4.1.17",
     "typescript": "^5.9.3"

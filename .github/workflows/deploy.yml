@@ -32,6 +32,9 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    # Reference the same environment as deploy so the build job can read the
+    # PUBLIC_FIREBASE_* variables you added under the "github-pages" environment.
+    environment: github-pages
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -70,6 +73,12 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} run lint
         working-directory: ${{ env.BUILD_PATH }}
       - name: Build with Astro
+        env:
+          # Set these under repo Settings → Secrets and variables → Actions → Variables.
+          PUBLIC_FIREBASE_API_KEY: ${{ vars.PUBLIC_FIREBASE_API_KEY }}
+          PUBLIC_FIREBASE_AUTH_DOMAIN: ${{ vars.PUBLIC_FIREBASE_AUTH_DOMAIN }}
+          PUBLIC_FIREBASE_PROJECT_ID: ${{ vars.PUBLIC_FIREBASE_PROJECT_ID }}
+          PUBLIC_FIREBASE_APP_ID: ${{ vars.PUBLIC_FIREBASE_APP_ID }}
         run: |
           ${{ steps.detect-package-manager.outputs.runner }} astro build \
             --site "${{ steps.pages.outputs.origin }}" \

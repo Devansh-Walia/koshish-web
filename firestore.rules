@@ -1,0 +1,71 @@
+rules_version = '2';
+
+// Security rules for the Koshish challenge/donation counters.
+//
+// The Firebase web config shipped in the site is public by design; these
+// rules are what stop abuse. Anyone may READ the totals, but a WRITE is only
+// accepted if it is exactly one of these increments:
+//   - a sale:        sales      += 1..100000
+//   - a follow:      follows    += 1
+//   - a participant: game       += 1
+//   - a donation:    donations  += <QR amount> AND emoji_<id> += 1
+// Nothing can be decreased, reset, deleted, or added outside this shape.
+//
+// Deploy: paste into Firebase console → Firestore → Rules, or
+//   npx firebase-tools deploy --only firestore:rules
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /challenge/totals {
+      allow read: if true;
+      allow create: if validWrite({});
+      allow update: if validWrite(resource.data);
+      allow delete: if false;
+    }
+
+    // Everything else is locked.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function allowedKeys() {
+      return ['donations', 'sales', 'follows', 'game',
+              'emoji_50', 'emoji_100', 'emoji_150', 'emoji_200',
+              'emoji_250', 'emoji_500', 'emoji_1000'];
+    }
+
+    // How much `key` grew in this write (old value treated as 0 if missing).
+    function delta(before, key) {
+      let after = request.resource.data.get(key, 0);
+      return after is int ? after - before.get(key, 0) : -1;
+    }
+
+    function changedOnly(before, keys) {
+      return request.resource.data.diff(before).affectedKeys().hasOnly(keys)
+        && request.resource.data.diff(before).affectedKeys().hasAll(keys);
+    }
+
+    function donation(before, id, amount) {
+      return changedOnly(before, ['donations', 'emoji_' + id])
+        && delta(before, 'donations') == amount
+        && delta(before, 'emoji_' + id) == 1;
+    }
+
+    function validWrite(before) {
+      return request.resource.data.keys().hasOnly(allowedKeys()) && (
+        (changedOnly(before, ['sales'])
+          && delta(before, 'sales') >= 1 && delta(before, 'sales') <= 100000)
+        || (changedOnly(before, ['follows']) && delta(before, 'follows') == 1)
+        || (changedOnly(before, ['game']) && delta(before, 'game') == 1)
+        || donation(before, '50', 50)
+        || donation(before, '100', 100)
+        || donation(before, '150', 150)
+        || donation(before, '200', 200)
+        || donation(before, '250', 250)
+        || donation(before, '500', 500)
+        || donation(before, '1000', 1000)
+      );
+    }
+  }
+}
