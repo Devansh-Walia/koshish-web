@@ -43,7 +43,7 @@ const currentPath = Astro.url.pathname;
       </a>
       
       <!-- Desktop Menu -->
-      <div class="hidden md:flex items-center space-x-8">
+      <div class="hidden lg:flex items-center space-x-8">
         {navItems.map((item) => (
           item.subPaths.length > 0 ? (
             <div class="dropdown-container group relative flex h-full cursor-pointer items-center space-x-1 font-medium text-gray-600 hover:text-primary transition-colors py-2">
@@ -78,7 +78,7 @@ const currentPath = Astro.url.pathname;
       </div>
 
       <!-- Mobile Menu Toggle -->
-      <div class="md:hidden">
+      <div class="lg:hidden">
         <button id="mobile-menu-toggle" aria-label="Toggle menu" class="p-2 text-gray-600 hover:text-primary transition-colors rounded-lg hover:bg-gray-100">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -89,7 +89,7 @@ const currentPath = Astro.url.pathname;
   </div>
 
   <!-- Mobile Menu Overlay -->
-  <div id="mobile-menu" class="hidden fixed inset-0 z-100 bg-white transform transition-transform duration-300 md:hidden">
+  <div id="mobile-menu" class="hidden fixed inset-0 z-100 bg-white transform transition-transform duration-300 lg:hidden">
     <div class="p-4 flex justify-between items-center border-b border-gray-100 bg-white">
       <span class="font-heading font-bold text-xl text-gray-900">Menu</span>
       <button id="mobile-menu-close" class="p-2 text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-100">
